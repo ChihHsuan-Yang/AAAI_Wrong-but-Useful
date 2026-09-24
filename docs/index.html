@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wrong but Useful — Trajectory Value Beyond Answer Correctness in Multi-Agent Messages</title>
-<meta name="description" content="DHD measures whether making a multi-agent message available helps or harms downstream reasoning. Wrong answers can still be useful. AAAI paper, code, and data.">
+<title>Wrong but Useful &mdash; Trajectory Value Beyond Answer Correctness in Multi-Agent Messages</title>
+<meta name="description" content="DHD measures whether making a multi-agent message available helps or harms downstream reasoning. Wrong answers can still be useful. AAAI paper, code, and dataset.">
 <link rel="canonical" href="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages">
@@ -12,67 +12,115 @@
 <meta property="og:url" content="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/">
 <meta property="og:image" content="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/assets/fig_DHD_diagram_corrected.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129513;</text></svg>">
 <style>
 :root{
-  --bg:#ffffff; --fg:#16191d; --muted:#5a6472; --line:#e3e7ec; --soft:#f6f8fa;
-  --accent:#1f6f5c; --accent-fg:#ffffff; --warn-bg:#fff8e6; --warn-line:#e7c96b;
-  --pill:#eef3f1; --maxw:960px;
+  --bg:#ffffff; --fg:#14171a; --muted:#59636f; --line:#e4e8ed; --soft:#f7f9fb; --soft2:#eef3f7;
+  --accent:#1f6f5c; --accent-fg:#ffffff; --accent-soft:#e8f3ef;
+  --warn-bg:#fff8e6; --warn-line:#e7c96b; --pill:#eef3f1;
+  --ok:#1f6f5c; --no:#a4332c;
+  --maxw:1040px; --rad:12px;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#101316; --fg:#e8ecf1; --muted:#9aa6b4; --line:#262c33; --soft:#171b1f;
-    --accent:#5fc4a6; --accent-fg:#0b1a15; --warn-bg:#2a2412; --warn-line:#6d5c22; --pill:#1b2420;
-  }
-}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1214; --fg:#e9edf2; --muted:#9aa6b3; --line:#252b31; --soft:#161a1e; --soft2:#1b2126;
+  --accent:#5fc4a6; --accent-fg:#0b1a15; --accent-soft:#16241f;
+  --warn-bg:#2a2412; --warn-line:#6d5c22; --pill:#1b2420; --ok:#5fc4a6; --no:#e2837c;}}
 :root[data-theme="dark"]{
-  --bg:#101316; --fg:#e8ecf1; --muted:#9aa6b4; --line:#262c33; --soft:#171b1f;
-  --accent:#5fc4a6; --accent-fg:#0b1a15; --warn-bg:#2a2412; --warn-line:#6d5c22; --pill:#1b2420;
-}
+  --bg:#0f1214; --fg:#e9edf2; --muted:#9aa6b3; --line:#252b31; --soft:#161a1e; --soft2:#1b2126;
+  --accent:#5fc4a6; --accent-fg:#0b1a15; --accent-soft:#16241f;
+  --warn-bg:#2a2412; --warn-line:#6d5c22; --pill:#1b2420; --ok:#5fc4a6; --no:#e2837c;}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0}
-.wrap{max-width:var(--maxw);margin:0 auto;padding-left:20px;padding-right:20px}
+html{scroll-behavior:smooth;scroll-padding-top:68px}
+body{background:var(--bg);color:var(--fg);margin:0;
+  font:17px/1.72 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:22px;padding-right:22px}
 a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
 a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
-header{border-bottom:1px solid var(--line);padding-block:44px 34px}
-h1{font-size:clamp(1.55rem,4.1vw,2.5rem);line-height:1.22;margin:0 0 6px;letter-spacing:-.02em}
-.sub{color:var(--muted);font-size:1.02rem;margin:0 0 20px}
-.authors{margin:0 0 6px;line-height:2}
+
+/* ---------- hero ---------- */
+header{border-bottom:1px solid var(--line);padding-block:52px 40px;
+  background:linear-gradient(180deg,var(--soft) 0%,var(--bg) 100%)}
+h1{font-size:clamp(1.65rem,4.3vw,2.7rem);line-height:1.18;margin:0 0 10px;letter-spacing:-.022em;font-weight:750}
+.sub{color:var(--muted);font-size:1.1rem;margin:0 0 22px;max-width:60ch}
+.venue{display:inline-block;background:var(--pill);border:1px solid var(--line);border-radius:999px;
+  padding:4px 14px;font-size:.84rem;color:var(--muted);margin-bottom:18px;font-weight:550}
+.authors{margin:0 0 4px;line-height:2.05;font-size:1rem}
 .authors span{white-space:nowrap}
-.aff{color:var(--muted);font-size:.9rem;margin:10px 0 0}
-.aff ol{margin:4px 0 0;padding-left:1.1rem}
-.venue{display:inline-block;background:var(--pill);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.83rem;color:var(--muted);margin-bottom:16px}
-.btns{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-fg);padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.95rem}
-.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
-.btn .tag{font-weight:500;font-size:.78rem;opacity:.85}
-nav.toc{border-bottom:1px solid var(--line);background:var(--soft);position:sticky;top:0;z-index:5}
-nav.toc ul{display:flex;flex-wrap:wrap;gap:4px 18px;list-style:none;margin:0;padding:11px 20px;max-width:var(--maxw);margin-inline:auto;font-size:.9rem}
-section{padding-block:40px;border-bottom:1px solid var(--line)}
-h2{font-size:1.42rem;margin:0 0 14px;letter-spacing:-.01em}
-h3{font-size:1.06rem;margin:26px 0 8px}
-p{margin:0 0 14px}
-figure{margin:22px 0 8px}
-figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;background:#fff}
-figcaption{color:var(--muted);font-size:.87rem;margin-top:9px}
-.note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:9px;padding:13px 16px;margin:18px 0;font-size:.93rem}
-.note strong{font-weight:700}
-.tablewrap{overflow-x:auto;margin:16px 0}
-table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:460px}
-th,td{border:1px solid var(--line);padding:8px 11px;text-align:left}
-th{background:var(--soft);font-weight:650}
+.aff{color:var(--muted);font-size:.9rem;margin:12px 0 0}
+.aff ol{margin:4px 0 0;padding-left:1.15rem}
+.btns{display:flex;flex-wrap:wrap;gap:11px;margin:26px 0 0}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-fg);
+  padding:11px 20px;border-radius:9px;text-decoration:none;font-weight:650;font-size:.96rem;
+  border:1px solid transparent;transition:transform .08s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.alt{background:var(--bg);color:var(--fg);border-color:var(--line)}
+.btn .tag{font-weight:500;font-size:.76rem;opacity:.82}
+
+/* ---------- sticky nav ---------- */
+nav.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+nav.toc ul{display:flex;flex-wrap:wrap;gap:2px 22px;list-style:none;margin:0 auto;padding:12px 22px;
+  max-width:var(--maxw);font-size:.93rem;font-weight:550}
+nav.toc a{color:var(--muted);text-decoration:none}
+nav.toc a:hover{color:var(--accent)}
+
+/* ---------- key takeaways cards ---------- */
+.takeaways{padding-block:38px 6px}
+.tk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:16px;margin-top:18px}
+.tk{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:var(--rad);padding:18px 18px 16px}
+.tk .big{font-size:1.85rem;font-weight:760;letter-spacing:-.02em;line-height:1.1;color:var(--accent)}
+.tk .lab{font-size:.83rem;text-transform:uppercase;letter-spacing:.055em;color:var(--muted);
+  font-weight:650;margin-top:8px}
+.tk p{margin:8px 0 0;font-size:.93rem;color:var(--fg);line-height:1.6}
+
+/* ---------- sections ---------- */
+section{padding-block:46px;border-bottom:1px solid var(--line)}
+h2{font-size:1.55rem;margin:0 0 16px;letter-spacing:-.014em;font-weight:720}
+h2 .kicker{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.075em;
+  color:var(--accent);font-weight:700;margin-bottom:5px}
+h3{font-size:1.1rem;margin:30px 0 9px;font-weight:660}
+p{margin:0 0 15px;max-width:72ch}
+figure{margin:26px 0 8px}
+figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--rad);background:#fff}
+figcaption{color:var(--muted);font-size:.88rem;margin-top:10px;line-height:1.6;max-width:78ch}
+.note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:var(--rad);
+  padding:15px 18px;margin:20px 0;font-size:.94rem;line-height:1.65}
+.callout{background:var(--accent-soft);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:var(--rad);padding:15px 18px;margin:20px 0;font-size:.94rem}
+.tablewrap{overflow-x:auto;margin:20px 0;border:1px solid var(--line);border-radius:var(--rad)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:520px}
+caption{text-align:left;padding:13px 15px;color:var(--muted);font-size:.87rem;
+  border-bottom:1px solid var(--line);line-height:1.55}
+th,td{border-bottom:1px solid var(--line);padding:11px 15px;text-align:left;vertical-align:top}
+thead th{background:var(--soft2);font-weight:660;font-size:.86rem;text-transform:uppercase;letter-spacing:.03em}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--soft)}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.78rem;font-weight:620;
+  border:1px solid var(--line);background:var(--pill);white-space:nowrap}
+.pill.ok{color:var(--ok)} .pill.no{color:var(--no)}
+a.rlink{display:inline-flex;align-items:center;gap:6px;font-weight:600;text-decoration:none;
+  border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+a.rlink:hover{border-bottom-color:var(--accent)}
 code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-code{background:var(--soft);padding:1.5px 5px;border-radius:4px;font-size:.89em}
-pre{background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:14px;overflow-x:auto;font-size:.86rem;line-height:1.5}
+code{background:var(--soft2);padding:1.5px 6px;border-radius:5px;font-size:.88em}
+pre{background:var(--soft);border:1px solid var(--line);border-radius:var(--rad);padding:16px;
+  overflow-x:auto;font-size:.87rem;line-height:1.6}
 pre code{background:none;padding:0}
-ul.tight{margin:0 0 14px;padding-left:1.15rem}
-ul.tight li{margin-bottom:6px}
-footer{padding-block:32px 46px;color:var(--muted);font-size:.89rem}
-footer a{color:var(--accent)}
+ul.tight{margin:0 0 15px;padding-left:1.2rem;max-width:72ch}
+ul.tight li{margin-bottom:7px}
+footer{padding-block:34px 52px;color:var(--muted);font-size:.9rem}
 .skip{position:absolute;left:-9999px}
-.skip:focus{left:12px;top:12px;position:fixed;background:var(--accent);color:var(--accent-fg);padding:10px 16px;border-radius:7px;z-index:99}
-@media (max-width:560px){ .btn{flex:1 1 100%;justify-content:center} nav.toc{position:static} }
+.skip:focus{left:14px;top:14px;position:fixed;background:var(--accent);color:var(--accent-fg);
+  padding:11px 18px;border-radius:8px;z-index:99}
+@media (max-width:620px){
+  body{font-size:16px}
+  .btn{flex:1 1 100%;justify-content:center}
+  nav.toc{position:static}
+  .tk .big{font-size:1.6rem}
+}
 </style>
 </head>
 <body>
@@ -80,7 +128,7 @@ footer a{color:var(--accent)}
 
 <header>
   <div class="wrap">
-    <div class="venue">arXiv:2608.14375 &middot; cs.AI &middot; submitted 14 August 2026</div>
+    <div class="venue">arXiv:2608.14375 &nbsp;&middot;&nbsp; cs.AI &nbsp;&middot;&nbsp; submitted 14 August 2026</div>
     <h1>Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages</h1>
     <p class="sub">A message whose own answer is wrong can still carry the decomposition, constraint, or principle another agent needs.</p>
     <p class="authors">
@@ -97,22 +145,25 @@ footer a{color:var(--accent)}
         <li>Brookhaven National Laboratory, Upton, NY, USA</li>
         <li>University of Chicago, Chicago, IL, USA</li>
       </ol>
-      <p style="margin-top:8px"><sup>&#42;</sup>Corresponding author: <a href="mailto:bellayang@anl.gov">bellayang@anl.gov</a></p>
+      <p style="margin-top:9px"><sup>&#42;</sup>Corresponding author: <a href="mailto:bellayang@anl.gov">bellayang@anl.gov</a></p>
     </div>
     <div class="btns">
-      <a class="btn" href="https://arxiv.org/abs/2608.14375">Paper <span class="tag">arXiv</span></a>
-      <a class="btn alt" href="https://arxiv.org/pdf/2608.14375">PDF</a>
-      <a class="btn alt" href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">Code <span class="tag">GitHub</span></a>
-      <a class="btn alt" href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Data <span class="tag">non-commercial</span></a>
+      <a class="btn" href="https://arxiv.org/abs/2608.14375">&#9993;&nbsp; Paper <span class="tag">arXiv</span></a>
+      <a class="btn alt" href="https://arxiv.org/pdf/2608.14375">&#9782;&nbsp; PDF</a>
+      <a class="btn alt" href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">&#9737;&nbsp; Code <span class="tag">GitHub</span></a>
+      <a class="btn alt" href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">&#9636;&nbsp; Dataset <span class="tag">Hugging Face</span></a>
+      <a class="btn alt" href="#cite">&#8220;&#8221;&nbsp; BibTeX</a>
     </div>
   </div>
 </header>
 
 <nav class="toc" aria-label="Section navigation">
   <ul>
+    <li><a href="#takeaways">Key takeaways</a></li>
     <li><a href="#idea">Core idea</a></li>
     <li><a href="#protocol">DHD protocol</a></li>
     <li><a href="#findings">Findings</a></li>
+    <li><a href="#resources">Resources</a></li>
     <li><a href="#reproduce">Reproduce</a></li>
     <li><a href="#data">Data &amp; models</a></li>
     <li><a href="#limits">Limitations</a></li>
@@ -123,8 +174,35 @@ footer a{color:var(--accent)}
 <main id="main">
 <div class="wrap">
 
+<section id="takeaways" class="takeaways">
+  <h2><span class="kicker">Key takeaways</span>What this paper establishes</h2>
+  <p>Answer correctness is informative, but it does not determine whether a message helps the reasoning that follows.</p>
+  <div class="tk-grid">
+    <div class="tk">
+      <div class="big">41.9% &middot; 45.3%</div>
+      <div class="lab">Wrong, yet helpful</div>
+      <p>Among leave-one-out replays where a wrong-answer message <em>changes</em> final correctness, this share moves it in the helpful direction &mdash; OSS and Gemma respectively. Pooled per model.</p>
+    </div>
+    <div class="tk">
+      <div class="big">10 / 10</div>
+      <div class="lab">Every benchmark&ndash;model cell</div>
+      <p>Wrong-helpful messages appear in all five benchmarks under both model families. Their presence is universal; their magnitude is not.</p>
+    </div>
+    <div class="tk">
+      <div class="big">p = 0.0002</div>
+      <div class="lab">Beyond replay noise</div>
+      <p>Controlled repeats show the number of repeatable message effects is unlikely to arise from replay variation alone.</p>
+    </div>
+    <div class="tk">
+      <div class="big">No model</div>
+      <div class="lab">Nothing to download</div>
+      <p>This work releases no trained checkpoint. Experiments use openly available upstream model families through inference endpoints.</p>
+    </div>
+  </div>
+</section>
+
 <section id="idea">
-  <h2>The core idea</h2>
+  <h2><span class="kicker">The distinction</span>Correctness is not value</h2>
   <p>Multi-agent systems routinely decide which messages should shape a final answer using agreement, confidence, or automated scores. That filtering assumes a message likely to be <em>correct</em> is also worth <em>keeping</em>.</p>
   <p>This paper separates two different judgments about the same message:</p>
   <ul class="tight">
@@ -135,7 +213,7 @@ footer a{color:var(--accent)}
 </section>
 
 <section id="protocol">
-  <h2>Diverse Hypothesis Deliberation (DHD)</h2>
+  <h2><span class="kicker">Method</span>Diverse Hypothesis Deliberation</h2>
   <p>DHD is a controlled measurement protocol. For each problem a recruiter assigns five problem-specific roles without seeing the ground-truth answer. Five hypothesizers each produce one structured message. An integrator then synthesizes a final answer, and a separate evaluator compares that answer to ground truth.</p>
   <p>The measurement comes from <strong>replay</strong>: the five messages are cached, and the same integrator is run again with each message either available or hidden. Comparing the outcomes isolates one message's contribution &mdash; its trajectory value &mdash; while holding everything else fixed.</p>
   <figure>
@@ -150,7 +228,7 @@ footer a{color:var(--accent)}
 </section>
 
 <section id="findings">
-  <h2>What the study found</h2>
+  <h2><span class="kicker">Results</span>What the study found</h2>
   <p>Across five mathematics and science benchmarks and two openly available model families &mdash; <code>gpt-oss-120b</code> (OSS) and <code>gemma-4-31B-it</code> (Gemma) &mdash; <strong>wrong-helpful messages appear in every benchmark&ndash;model combination.</strong></p>
 
   <h3>Among flips caused by wrong-answer messages, more than four in ten are helpful</h3>
@@ -175,7 +253,7 @@ footer a{color:var(--accent)}
   <h3>Evaluation is stable across evaluators</h3>
   <div class="tablewrap">
     <table>
-      <caption class="skip">Pairwise evaluator agreement over 16,724 saved submissions</caption>
+      <caption><b>Table 1.</b> Pairwise agreement among three evaluator models over 16,724 saved submissions, under the same answer-equivalence procedure. None of the three sees a reasoning trace.</caption>
       <thead><tr><th>Evaluator pair</th><th class="num">Agreement</th><th class="num">Cohen's &kappa;</th><th class="num">Coverage</th></tr></thead>
       <tbody>
         <tr><td>OSS vs Llama</td><td class="num">94.24%</td><td class="num">0.850</td><td class="num">99.83%</td></tr>
@@ -186,28 +264,92 @@ footer a{color:var(--accent)}
   </div>
   <p>16,724 saved submissions replayed with three open evaluators. <code>Meta-Llama-3.1-70B-Instruct</code> and <code>gemma-3-27b-it</code> appear here <strong>only as evaluators</strong> in this agreement check &mdash; they are not actor model families in the study.</p>
 
-  <h3>Benchmarks</h3>
-  <div class="tablewrap">
-    <table>
-      <thead><tr><th>Benchmark</th><th>Domain and format</th><th class="num">Problems</th></tr></thead>
-      <tbody>
-        <tr><td>Omni-MATH-2</td><td>Open-answer competition mathematics</td><td class="num">4,181</td></tr>
-        <tr><td>JEEBench</td><td>Mixed-choice and numeric exam science</td><td class="num">515</td></tr>
-        <tr><td>SciBench</td><td>Numeric and short-answer college science</td><td class="num">580</td></tr>
-        <tr><td>LAB-Bench</td><td>Long-evidence multiple-choice biology</td><td class="num">741</td></tr>
-        <tr><td>MaScQA</td><td>Mixed-format materials science</td><td class="num">649<sup><a href="#fn-mascqa">&dagger;</a></sup></td></tr>
-      </tbody>
-    </table>
-  </div>
+  <p style="font-size:.93rem;color:var(--muted)">Benchmark sizes and per-benchmark terms are in <a href="#resources">Table&nbsp;3</a>.</p>
   <p id="fn-mascqa" style="font-size:.88rem;color:var(--muted)"><strong>&dagger;</strong> MaScQA contains 650 raw rows; one row is an exact duplicate, so all analyses collapse it to 649 unique problems. Some released per-benchmark property files therefore list 650 raw rows while the analysis <em>N</em> is 649.</p>
 </section>
 
+<section id="resources">
+  <h2><span class="kicker">Resources</span>Everything released, in one table</h2>
+  <p>Each row links directly to the artifact. The dataset is public but <strong>not unrestricted</strong> &mdash; see the terms column before you download.</p>
+  <div class="tablewrap">
+    <table>
+      <caption><b>Table 2.</b> Public artifacts for this paper. Offline reproduction needs only the code repository; the dataset is required solely for work beyond the bundled derived data.</caption>
+      <thead>
+        <tr><th scope="col">Artifact</th><th scope="col">What it contains</th><th scope="col">Terms</th><th scope="col">Open</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Paper</th>
+          <td>Full text, appendix, and an ancillary reproducibility artifact</td>
+          <td><span class="pill">arXiv</span></td>
+          <td><a class="rlink" href="https://arxiv.org/abs/2608.14375">arXiv:2608.14375</a> &middot; <a class="rlink" href="https://arxiv.org/pdf/2608.14375">PDF</a></td>
+        </tr>
+        <tr>
+          <th scope="row">Code</th>
+          <td>DHD implementation, analysis pipeline, bundled derived data and figure inputs, tests</td>
+          <td><span class="pill ok">MIT</span></td>
+          <td><a class="rlink" href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">GitHub repository</a></td>
+        </tr>
+        <tr>
+          <th scope="row">Dataset</th>
+          <td>Trajectory-value measurements, hypotheses, interventions, replay labels, registry and provenance</td>
+          <td><span class="pill no">Non-commercial</span> <span class="pill no">No training on LAB-Bench</span></td>
+          <td><a class="rlink" href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Hugging Face dataset card</a></td>
+        </tr>
+        <tr>
+          <th scope="row">Model</th>
+          <td><em>None.</em> No checkpoint was trained for this paper</td>
+          <td><span class="pill">n/a</span></td>
+          <td><span style="color:var(--muted)">Not applicable &mdash; upstream endpoints only</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Benchmarks and model families</h3>
+  <div class="tablewrap">
+    <table>
+      <caption><b>Table 3.</b> The five-benchmark suite. <em>N</em> is the number of unique problems in each evaluated slice; each is measured under both actor model families.</caption>
+      <thead>
+        <tr><th scope="col">Benchmark</th><th scope="col">Domain and format</th><th scope="col" class="num">Problems</th><th scope="col">Upstream terms</th><th scope="col">Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Omni-MATH-2</th><td>Open-answer competition mathematics</td><td class="num">4,181</td><td><span class="pill">Apache-2.0<sup>&#8224;</sup></span></td><td><a class="rlink" href="https://huggingface.co/datasets/martheballon/Omni-MATH-2">Hugging Face</a></td></tr>
+        <tr><th scope="row">JEEBench</th><td>Mixed-choice and numeric exam science</td><td class="num">515</td><td><span class="pill ok">MIT</span></td><td><a class="rlink" href="https://github.com/dair-iitd/jeebench">GitHub</a></td></tr>
+        <tr><th scope="row">SciBench</th><td>Numeric and short-answer college science</td><td class="num">580</td><td><span class="pill ok">MIT</span></td><td><a class="rlink" href="https://github.com/mandyyyyii/scibench">GitHub</a></td></tr>
+        <tr><th scope="row">LAB-Bench</th><td>Long-evidence multiple-choice biology</td><td class="num">741</td><td><span class="pill no">CC BY-SA 4.0 &middot; do not train</span></td><td><a class="rlink" href="https://huggingface.co/datasets/futurehouse/lab-bench">Hugging Face</a></td></tr>
+        <tr><th scope="row">MaScQA</th><td>Mixed-format materials science</td><td class="num">649<sup><a href="#fn-mascqa">&#8225;</a></sup></td><td><span class="pill no">CC BY-NC-SA 4.0</span></td><td><a class="rlink" href="https://github.com/M3RG-IITD/MaScQA">GitHub</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.88rem;color:var(--muted)"><sup>&#8224;</sup> The dataset registry records Apache-2.0 for Omni-MATH-2 while the authors&rsquo; own <code>DATA.md</code> disagrees; we have not adjudicated this, so treat those terms as unsettled.
+  <span id="fn-mascqa"><sup>&#8225;</sup> MaScQA contains 650 raw rows; one is an exact duplicate, so all analyses collapse it to 649 unique problems.</span></p>
+
+  <h3>Actor and evaluator models</h3>
+  <div class="tablewrap">
+    <table>
+      <caption><b>Table 4.</b> Upstream model families, accessed through inference endpoints. No weights were trained or redistributed for this paper.</caption>
+      <thead>
+        <tr><th scope="col">Model</th><th scope="col">Role in this paper</th><th scope="col">Decoding</th><th scope="col">Upstream</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>gpt-oss-120b</code></th><td><span class="pill ok">Actor</span> (&ldquo;OSS&rdquo;), and the shared evaluator for both families</td><td>Hypothesizer T&nbsp;=&nbsp;0.7; recruiter, integrator, evaluator T&nbsp;=&nbsp;0</td><td><a class="rlink" href="https://huggingface.co/openai/gpt-oss-120b">Model card</a></td></tr>
+        <tr><th scope="row"><code>gemma-4-31B-it</code></th><td><span class="pill ok">Actor</span> (&ldquo;Gemma&rdquo;)</td><td>Same role-specific settings</td><td><a class="rlink" href="https://huggingface.co/google/gemma-4-31b-it">Model card</a></td></tr>
+        <tr><th scope="row"><code>Meta-Llama-3.1-70B-Instruct</code></th><td><span class="pill">Evaluator only</span> &mdash; cross-evaluator agreement check</td><td>T&nbsp;=&nbsp;0</td><td><a class="rlink" href="https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct">Model card</a></td></tr>
+        <tr><th scope="row"><code>gemma-3-27b-it</code></th><td><span class="pill">Evaluator only</span> &mdash; cross-evaluator agreement check</td><td>T&nbsp;=&nbsp;0</td><td><a class="rlink" href="https://huggingface.co/google/gemma-3-27b-it">Model card</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.88rem;color:var(--muted)">Llama-3.1-70B and gemma-3-27b-it appear <strong>only</strong> in the evaluator-agreement check. They are not actor model families in this study.</p>
+</section>
+
 <section id="reproduce">
-  <h2>Reproduce the study</h2>
+  <h2><span class="kicker">Reproducibility</span>Reproduce the study</h2>
   <p>There is an important distinction between <em>offline analysis reproduction</em> and <em>live model regeneration</em>, and they are not equally available.</p>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>Level</th><th>What it does</th><th>What you need</th><th>Open to a newcomer?</th></tr></thead>
+      <caption><b>Table 5.</b> Four reproduction levels and what each actually requires. Only Level 1 is fully open to a newcomer with no endpoint.</caption>
+      <thead><tr><th scope="col">Level</th><th scope="col">What it does</th><th scope="col">What you need</th><th scope="col">Open to a newcomer?</th></tr></thead>
       <tbody>
         <tr><td>1. Offline</td><td>Install, unit tests, checksum validation, regenerate figures and summary tables from data bundled in the repository</td><td>Python &ge; 3.11</td><td><strong>Yes, fully.</strong> This is the reproduction path.</td></tr>
         <tr><td>2. Live protocol</td><td>Run DHD on the bundled fixture against an endpoint you control</td><td>Level 1 plus your own OpenAI-compatible endpoint</td><td>Yes, if you bring an endpoint</td></tr>
@@ -232,7 +374,7 @@ bash scripts/reproduce_analysis.sh  # regenerate figures and summary tables</cod
 </section>
 
 <section id="data">
-  <h2>Data and models</h2>
+  <h2><span class="kicker">Access</span>Data and models</h2>
   <h3>No model is released, and none is needed</h3>
   <div class="note">
     <strong>This work does not release a paper-specific trained model.</strong> Nothing was fine-tuned for this paper. Experiments use openly available upstream model families through inference endpoints, so <strong>no model download is required or provided</strong>. The hosted endpoints did not expose weight-revision hashes, so the paper reports model identifiers, prompt configurations, decoding settings and per-run provenance instead of a checkpoint hash.
@@ -248,7 +390,7 @@ bash scripts/reproduce_analysis.sh  # regenerate figures and summary tables</cod
 </section>
 
 <section id="limits">
-  <h2>Limitations</h2>
+  <h2><span class="kicker">Honest scope</span>Limitations</h2>
   <p>Quoted from the paper, because they qualify every result above.</p>
   <ul class="tight">
     <li>Trajectory-value labels describe a message&ndash;pool&ndash;integrator context, not an intrinsic property of text; individual signs can change even with fixed problems and messages.</li>
@@ -261,7 +403,7 @@ bash scripts/reproduce_analysis.sh  # regenerate figures and summary tables</cod
 </section>
 
 <section id="cite">
-  <h2>Citation</h2>
+  <h2><span class="kicker">Citation</span>Cite this work</h2>
 <pre><code>@misc{yang2026wrongbutuseful,
   title         = {Wrong but Useful: Trajectory Value Beyond Answer
                    Correctness in Multi-Agent Messages},
@@ -285,12 +427,12 @@ bash scripts/reproduce_analysis.sh  # regenerate figures and summary tables</cod
 <footer>
   <div class="wrap">
     <p>
-      <a href="https://arxiv.org/abs/2608.14375">Paper (arXiv:2608.14375)</a> &middot;
+      <a href="https://arxiv.org/abs/2608.14375">Paper</a> &middot;
       <a href="https://arxiv.org/pdf/2608.14375">PDF</a> &middot;
       <a href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">Code</a> &middot;
-      <a href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Dataset (non-commercial)</a>
+      <a href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Dataset</a>
     </p>
-    <p>Figures are reproduced from the paper. Code is released under the MIT License; see the repository for third-party notices. This site is an original page written for this project; it uses no external template, tracker, or analytics.</p>
+    <p>Figures are reproduced from the paper. Code is released under the MIT License; see the repository for third-party notices. This site is an original page written for this project &mdash; it uses no external template, tracker, or analytics.</p>
   </div>
 </footer>
 </body>

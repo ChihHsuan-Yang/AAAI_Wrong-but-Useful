@@ -1,18 +1,69 @@
 # Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages
 
-Code and derived data for the paper. The study measures, for a pool of five
-independently generated messages integrated into one final answer, whether
-*removing* a single message changes correctness. That yields a correctness x
-trajectory-value taxonomy in which **wrong proposals can be helpful** and
-**correct proposals can be harmful**.
+### Measuring whether a message helps the reasoning that follows, not just whether its answer is right
 
-| | |
-|---|---|
-| Paper | https://arxiv.org/abs/2608.14375 ([PDF](https://arxiv.org/pdf/2608.14375)) |
-| Code | https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful |
-| Project site | https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/ **(live)** |
-| Data | https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful **(public; NON-COMMERCIAL, and do-not-train on the LAB-Bench subset -- see [Data](#data))** |
-| License | MIT (see [`LICENSE`](LICENSE), [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)) |
+[![Project page](https://img.shields.io/badge/Project-Page-1f6f5c)](https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/)
+[![arXiv](https://img.shields.io/badge/arXiv-2608.14375-b31b1b)](https://arxiv.org/abs/2608.14375)
+[![PDF](https://img.shields.io/badge/Paper-PDF-333333)](https://arxiv.org/pdf/2608.14375)
+[![HF dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-Card-ffcc4d)](https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful)
+[![No model](https://img.shields.io/badge/Model-none%20released-9e9e9e)](docs/MODEL_DEPENDENCIES.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![CI](https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful/actions/workflows/ci.yml/badge.svg)](https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful/actions/workflows/ci.yml)
+
+Chih-Hsuan Yang¹\*, Anjir Ahmed Chowdhury², Cheng-Hau Yang¹, Weijian Zheng¹, Fernando Llorente³, Xiaolong Ma¹, Xinyang Li², Eliu A. Huerta¹⁴, Ian T. Foster⁴¹, Rajeev Thakur¹
+¹ Argonne National Laboratory · ² University of Houston · ³ Brookhaven National Laboratory · ⁴ University of Chicago · \* bellayang@anl.gov
+
+---
+
+Multi-agent systems decide which messages shape a final answer using agreement,
+confidence, or automated scores. That assumes a message likely to be *correct* is
+also worth *keeping*. This paper separates the two: **proposal correctness** asks
+whether a message's own answer is right; **trajectory value** asks whether making
+the whole message available helps or harms the reasoning that follows. They come
+apart in both directions — **wrong proposals can be helpful**, and **correct
+proposals can be harmful**.
+
+## Key findings
+
+| | Result | Detail |
+|---|---|---|
+| 🟢 | **41.9%** (OSS) · **45.3%** (Gemma) | Of leave-one-out replays where a wrong-answer message *changes* final correctness, this share moves it in the **helpful** direction. Pooled per model, not per benchmark. |
+| 🟢 | **10 / 10** benchmark–model cells | Wrong-helpful messages appear in every benchmark under both model families. |
+| 🔵 | **p = 0.0002** | Controlled repeats show the count of repeatable message effects is unlikely to arise from replay variation alone. |
+| 🟠 | Gemma only | After multiplicity control, wrong-helpful cases are recovered for **Gemma but not OSS**. |
+| ⬜ | Open question | The complete message works best, and retaining its reasoning preserves more success than retaining only its answer — but **the source of that advantage remains open**. |
+
+## Resources
+
+| Artifact | Contents | Terms | Link |
+|---|---|---|---|
+| **Paper** | Full text, appendix, ancillary reproducibility artifact | arXiv | [abs](https://arxiv.org/abs/2608.14375) · [PDF](https://arxiv.org/pdf/2608.14375) |
+| **Project page** | Findings, protocol, reproduction summary | — | [chihhsuan-yang.github.io](https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/) |
+| **Code** | DHD implementation, analysis pipeline, bundled derived data, tests | MIT | [this repository](https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful) |
+| **Dataset** | Trajectory-value measurements, hypotheses, interventions, replay labels, registry | ⚠️ **non-commercial**; **no training on LAB-Bench** | [🤗 dataset card](https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful) |
+| **Model** | *None — no checkpoint was trained for this paper* | n/a | [why, and what to configure instead](docs/MODEL_DEPENDENCIES.md) |
+
+### Benchmarks
+
+| Benchmark | Domain and format | Problems | Upstream terms | Source |
+|---|---|--:|---|---|
+| Omni-MATH-2 | Open-answer competition mathematics | 4,181 | Apache-2.0 † | [🤗](https://huggingface.co/datasets/martheballon/Omni-MATH-2) |
+| JEEBench | Mixed-choice and numeric exam science | 515 | MIT | [GitHub](https://github.com/dair-iitd/jeebench) |
+| SciBench | Numeric and short-answer college science | 580 | MIT | [GitHub](https://github.com/mandyyyyii/scibench) |
+| LAB-Bench | Long-evidence multiple-choice biology | 741 | ⚠️ CC BY-SA 4.0 · **do not train** | [🤗](https://huggingface.co/datasets/futurehouse/lab-bench) |
+| MaScQA | Mixed-format materials science | 649 ‡ | ⚠️ CC BY-NC-SA 4.0 | [GitHub](https://github.com/M3RG-IITD/MaScQA) |
+
+† The dataset registry records Apache-2.0 while the authors' own `DATA.md` disagrees; treat as unsettled.
+‡ MaScQA ships 650 raw rows; one is an exact duplicate, so analyses use 649 unique problems.
+
+### Models
+
+| Model | Role in this paper | Decoding | Upstream |
+|---|---|---|---|
+| `gpt-oss-120b` | **Actor** ("OSS") **and** the shared evaluator for both families | hypothesizer T=0.7; recruiter/integrator/evaluator T=0 | [🤗](https://huggingface.co/openai/gpt-oss-120b) |
+| `gemma-4-31B-it` | **Actor** ("Gemma") | same role-specific settings | [🤗](https://huggingface.co/google/gemma-4-31b-it) |
+| `Meta-Llama-3.1-70B-Instruct` | *Evaluator only* — cross-evaluator agreement check | T=0 | [🤗](https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct) |
+| `gemma-3-27b-it` | *Evaluator only* — cross-evaluator agreement check | T=0 | [🤗](https://huggingface.co/google/gemma-3-27b-it) |
 
 > **This work does not release a paper-specific trained model. Experiments use
 > openly available upstream model families through inference endpoints.**
