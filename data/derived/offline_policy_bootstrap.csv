@@ -1,0 +1,15 @@
+model,policy,eligible_problems,accuracy_percent,accuracy_ci95_low,accuracy_ci95_high,difference_vs_random_points,difference_vs_random_ci95_low,difference_vs_random_ci95_high,best_single_regret_points,best_single_regret_ci95_low,best_single_regret_ci95_high,helpful_discarded_mean,harmful_admitted_mean
+gpt_oss_120b,random_hypothesis,6666,73.579,72.67,74.483,0.0,0.0,0.0,11.749,11.188,12.322,0.271587,0.062826
+gpt_oss_120b,answer_consensus,6666,74.267,73.31,75.212,0.688,0.453,0.92,11.061,10.451,11.69,0.271507,0.056028
+gpt_oss_120b,highest_self_reported_confidence,6666,74.212,73.234,75.17,0.632,0.303,0.97,11.117,10.475,11.76,0.270622,0.057468
+gpt_oss_120b,proposal_correctness_oracle,6666,78.207,77.284,79.112,4.627,4.25,5.004,7.122,6.634,7.623,0.2485,0.039639
+gpt_oss_120b,best_single_outcome_oracle,6666,85.329,84.473,86.169,11.749,11.188,12.322,0.0,0.0,0.0,0.208671,0.008251
+gpt_oss_120b,independent_k0,6666,73.072,72.007,74.137,-0.507,-1.206,0.192,12.256,11.401,13.096,0.339484,0.0
+gpt_oss_120b,full_k5,6666,75.953,74.902,76.943,2.373,1.812,2.955,9.376,8.641,10.126,0.0,0.314131
+gemma_4_31b,random_hypothesis,6017,81.346,80.459,82.2,0.0,0.0,0.0,6.954,6.488,7.419,0.146252,0.05192
+gemma_4_31b,answer_consensus,6017,81.3,80.389,82.176,-0.047,-0.214,0.119,7.0,6.48,7.517,0.14723,0.051407
+gemma_4_31b,highest_self_reported_confidence,6017,80.979,80.019,81.899,-0.368,-0.685,-0.046,7.321,6.754,7.899,0.146382,0.055465
+gemma_4_31b,proposal_correctness_oracle,6017,82.764,81.875,83.613,1.418,1.209,1.633,5.536,5.114,5.971,0.141582,0.042413
+gemma_4_31b,best_single_outcome_oracle,6017,88.3,87.469,89.098,6.954,6.488,7.419,0.0,0.0,0.0,0.1175,0.011135
+gemma_4_31b,independent_k0,6017,82.882,81.918,83.813,1.536,0.934,2.141,5.418,4.737,6.099,0.182815,0.0
+gemma_4_31b,full_k5,6017,81.536,80.538,82.483,0.189,-0.286,0.668,6.764,6.116,7.412,0.0,0.259598

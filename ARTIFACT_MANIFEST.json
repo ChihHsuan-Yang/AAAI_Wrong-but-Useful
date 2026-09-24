@@ -1,0 +1,298 @@
+{
+  "artifact": "AAAI_Wrong-but-Useful",
+  "commands": {
+    "analysis": "bash scripts/reproduce_analysis.sh",
+    "smoke": "bash scripts/run_smoke_test.sh",
+    "tests": "python -m pytest",
+    "validate": "python scripts/validate_inputs.py"
+  },
+  "data_objects": [
+    {
+      "artifact_path": "data/derived/correctness_oracle_regret_decomposition.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 10,
+      "sha256": "36594931113fee9e02a229a1f3436d73e6bd8e7b03e97c375f851359016dd603",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/integrator_uptake_audit.csv",
+      "license_basis": "jeebench_MIT_redistribution_permitted",
+      "role": "paper_analysis_input",
+      "row_count": 10,
+      "sha256": "a69ceac9c88307725d74645def4a7d54961d1a595b9f01339b673ce5b2763ca8",
+      "source_type": "jeebench_mit_labels_and_author_paraphrase"
+    },
+    {
+      "artifact_path": "data/derived/majority_diagnostic.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 12,
+      "sha256": "aeb01b40ebe6d7d690f0221d62b8b3b739bc33b8387366cdb0a29eaf3e97b47f",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/offline_policy_bootstrap.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 14,
+      "sha256": "4bac546c4e2e2c69b08f9e8ad242be5f9db2ba7df08fad9c6ab1def741a35a6e",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/offline_policy_by_benchmark.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 10,
+      "sha256": "fb17be26b9fe16679a2f62c46d70ea63048ceea31b4ce3ea990b8bd87ac5dc1e",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/proposal_answer_coverage.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 12,
+      "sha256": "06fbdcab86a0a34ba2769918be6fb65590a77f3c6f1384c8c6c572bd6a80d145",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/component_masking_pilot_summary.json",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": null,
+      "sha256": "e80abc8201eb42668875e4762076523348bc9a77e9f39c84ce736f796250e223",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/gemma_repeated_benchmark_summary.json",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": null,
+      "sha256": "ef75719f013f9cdde309392c75db7581cbc39f8c9cb49b165e5791f11714218c",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/majority_diagnostic.json",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": null,
+      "sha256": "297363f51f9568f86a26bd1bef3079fdfbf2f113ecc4af0504ebc4b93e983b91",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/offline_review_closure.json",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": null,
+      "sha256": "b5e5efd50baa7d5c1d1ae419f778e3aec4237f228519fb88036926d3107bb9b9",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/oss_proposal_answer_audit.json",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": null,
+      "sha256": "cb64334da71141e57310daa937cb523848b580696766ea7944c03bfec78fc070",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/problem_blocked_replay_multiplicity.json",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": null,
+      "sha256": "35100a064fa03014bdf7e1a8dc14da771590dfd890ce1560d47cc5d757498873",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/repeated_effect_by_correctness.json",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": null,
+      "sha256": "22491f9886c7da1c4382fd6bfec7d72e3a054942e76299fdd0a3f00e01ff3b11",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/derived/signal_labels/matched_sensitivity_integrator_gemma_to_oss.csv",
+      "license_basis": "derived_labels_anonymized_keys_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 500,
+      "sha256": "62ab35de6ef1a0dd2925ec62ef1b049d3aacb1352a70b9a0747bc86d33a07944",
+      "source_type": "sanitized_signal_level_record"
+    },
+    {
+      "artifact_path": "data/derived/signal_labels/matched_sensitivity_order_gemma.csv",
+      "license_basis": "derived_labels_anonymized_keys_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 500,
+      "sha256": "bb71c31f1711d9b323b120a48d7d89cd41dbb5e2a090a6d9ab24611e8198d496",
+      "source_type": "sanitized_signal_level_record"
+    },
+    {
+      "artifact_path": "data/derived/signal_labels/matched_sensitivity_order_oss.csv",
+      "license_basis": "derived_labels_anonymized_keys_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 500,
+      "sha256": "a11edc7db5b47eb54d0bae6bee31af489b21b85b88326afadd2d2661faefd235",
+      "source_type": "sanitized_signal_level_record"
+    },
+    {
+      "artifact_path": "data/derived/signal_labels/value_aware_one_removal_per_fold.csv",
+      "license_basis": "derived_labels_anonymized_keys_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 9995,
+      "sha256": "803cd1fb46224c8bc208ededd78696234c4048acffabcbab4dacc7d0ce73f71f",
+      "source_type": "sanitized_signal_level_record"
+    },
+    {
+      "artifact_path": "figures/benchmark_properties_source.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 5,
+      "sha256": "f0797872ba2974cbaec9dc08e4c6647c68f484f171a9c4aefdacd1b7ffcebf88",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "figures/evaluator_agreement_source.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 3,
+      "sha256": "7b6f70abaf571ea4ac7ab9db2431bd8fe1879c720ecd925e2af550aa6713157f",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "figures/fig_correctness_flip_direction_source.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 8,
+      "sha256": "7ff16bb9065b779b86573cbca20179ad7a39464c730eb15dc460220c5658d030",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "figures/fig_cross_benchmark_trajectory_value_source.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 20,
+      "sha256": "0b677abb62c4b2f5c08d144258226a31f7b792e0c4e8f07e6898c6c695f17b3f",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "figures/fig_generation_integration_gap_gemma_source.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 5,
+      "sha256": "17e881331cd065ad10db9cc7af9e272a2484f83048bced5c8c423e5262c066c0",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "figures/fig_generation_integration_gap_source.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 5,
+      "sha256": "b834eb4a54a806fdee039b89a82dc19b3ac18cc4097f6adcc5009eeea01d5d6a",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "figures/fig_loo_by_k_appendix_source.csv",
+      "license_basis": "derived_aggregate_no_raw_text",
+      "role": "paper_analysis_input",
+      "row_count": 80,
+      "sha256": "3784c0911b2983ceb2c7def71a4d64688728a9f1f92ce7ef8ffe4ec045dad987",
+      "source_type": "sanitized_derived_record"
+    },
+    {
+      "artifact_path": "data/fixtures/smoke_pool.jsonl",
+      "license_basis": "artifact_license",
+      "role": "smoke_fixture",
+      "row_count": null,
+      "sha256": "9ac9deb9471082d7d6d5862b0f472ec07a48e607dae2e6cfecec484f6a90f421",
+      "source_type": "synthetic_fixture"
+    }
+  ],
+  "figures": [
+    {
+      "command": "python scripts/reproduce_analysis.py",
+      "figure": "fig_correctness_flip_direction",
+      "inputs": [
+        "figures/fig_correctness_flip_direction_source.csv"
+      ]
+    },
+    {
+      "command": "python scripts/reproduce_analysis.py",
+      "figure": "fig_cross_benchmark_trajectory_value",
+      "inputs": [
+        "figures/fig_cross_benchmark_trajectory_value_source.csv"
+      ]
+    },
+    {
+      "command": "python scripts/reproduce_analysis.py",
+      "figure": "fig_generation_integration_gap",
+      "inputs": [
+        "figures/fig_generation_integration_gap_source.csv"
+      ]
+    },
+    {
+      "command": "python scripts/reproduce_analysis.py",
+      "figure": "fig_generation_integration_gap_gemma",
+      "inputs": [
+        "figures/fig_generation_integration_gap_gemma_source.csv"
+      ]
+    },
+    {
+      "command": "python scripts/reproduce_analysis.py",
+      "figure": "fig_loo_by_k_appendix",
+      "inputs": [
+        "figures/fig_loo_by_k_appendix_source.csv"
+      ]
+    },
+    {
+      "command": "python scripts/reproduce_analysis.py",
+      "figure": "fig_evaluator_agreement",
+      "inputs": [
+        "figures/evaluator_agreement_source.csv"
+      ]
+    }
+  ],
+  "headline_summary": "data/manifests/expected_summaries.json",
+  "reproducibility_claims": {
+    "analysis_reproduction": "reproduces the exact values enumerated in this manifest and regenerates the six corresponding data-driven figures, the headline taxonomy cell counts, and the matched-sensitivity and cross-fitted one-removal tables from the included sanitized records, without model calls. It does not regenerate every table in the paper; see the figures and tables lists.",
+    "protocol_reproduction": "recreates the prompt, integration, evaluation, and replay procedure through a generic compatible model API; stochastic generations are not promised to be byte-identical."
+  },
+  "signal_tables_summary": "data/manifests/expected_signal_tables.json",
+  "tables": [
+    {
+      "command": "python scripts/recompute_signal_tables.py",
+      "coverage": "exact point estimates from per-signal records",
+      "inputs": [
+        "data/derived/signal_labels/matched_sensitivity_order_oss.csv",
+        "data/derived/signal_labels/matched_sensitivity_order_gemma.csv",
+        "data/derived/signal_labels/matched_sensitivity_integrator_gemma_to_oss.csv"
+      ],
+      "table": "tab:matched_sensitivity"
+    },
+    {
+      "command": "python scripts/recompute_signal_tables.py",
+      "coverage": "exact point estimates from per-fold records",
+      "inputs": [
+        "data/derived/signal_labels/value_aware_one_removal_per_fold.csv"
+      ],
+      "table": "tab:cross_fitted_one_removal"
+    },
+    {
+      "command": "python scripts/recompute_signal_tables.py",
+      "coverage": "exact point estimates from per-fold records",
+      "inputs": [
+        "data/derived/signal_labels/value_aware_one_removal_per_fold.csv"
+      ],
+      "table": "tab:cross_fitted_one_removal_by_benchmark"
+    },
+    {
+      "command": "python scripts/reproduce_analysis.py",
+      "coverage": "exact at the aggregated-cell level",
+      "inputs": [
+        "figures/fig_correctness_flip_direction_source.csv",
+        "figures/fig_cross_benchmark_trajectory_value_source.csv"
+      ],
+      "table": "headline_taxonomy_cells"
+    }
+  ]
+}

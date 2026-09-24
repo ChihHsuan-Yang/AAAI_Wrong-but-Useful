@@ -1,0 +1,284 @@
+# DHD — Diverse Hypothesis Deliberation (single-turn) base configuration.
+#
+# Sweep K by overriding n_hypothesizers (1..5). The recruiter generates a roster
+# of cnt_roster roles ONCE; the first K roles are sliced onto the first K of the
+# 5 hypothesizer slots below (nested-subset K design). Roles are recruited
+# dynamically, so the static role_description fields here are only fallbacks if
+# the recruiter is unavailable.
+#
+# The actor and evaluator are served by a generic OpenAI-compatible model API
+# (configured via MODEL_API_BASE / MODEL_API_MODEL). Score exposure is an OFFLINE
+# replay step; the live run renders the score-free placebo (exposure_condition:
+# none).
+
+max_rounds: &max_rounds 1
+cnt_agents: &cnt_roster 5
+
+prompts:
+  recruiter_prepend_prompt: &recruiter_prepend_prompt |-
+    You are coordinating a panel of independent reasoning agents who will each
+    attempt the following problem from a DISTINCT, legitimate perspective:
+
+    ${task_description}
+
+    You will recruit ${cnt_critic_agents} experts. Each expert must use a
+    genuinely different reasoning lens (for example: structured decomposition;
+    first-principles re-derivation; analogy / transfer to a known method;
+    constraint / boundary / units analysis; estimation / sanity-bounding). Every
+    expert must be a competent, good-faith solver — none is a strawman, and none
+    should be told to be wrong. Diversity comes from the APPROACH, not from
+    making mistakes.
+
+  recruiter_append_prompt: &recruiter_append_prompt |-
+    Recruit ${cnt_critic_agents} experts whose perspectives are maximally
+    complementary for THIS problem, so that even an imperfect hypothesis from one
+    may contain a reasoning direction useful to a final integrator.
+
+    # Response Format
+    Respond with a numbered list. Each line: <short role name> - <one-sentence
+    role description naming the distinct reasoning lens>.
+    1. <name> - <description>.
+    2. <name> - <description>.
+    ...
+
+  hypothesizer_prepend_prompt: &hypothesizer_prepend_prompt |-
+    You are one of several INDEPENDENT reasoning agents working on the same
+    problem. You have been assigned a role by the recruiter:
+
+    Role: ${role_description}
+
+    Problem:
+    ${task_description}
+
+    Make a serious, good-faith attempt to solve the problem FROM YOUR ASSIGNED
+    PERSPECTIVE. You are working independently — you cannot see the other agents'
+    work. Do not intentionally be wrong. Your proposed answer may be tentative,
+    but it must be your genuine best attempt. Focus on contributing a distinct
+    useful idea, decomposition, assumption, or check that a final integrator
+    could build on.
+
+  hypothesizer_append_prompt: &hypothesizer_append_prompt |-
+    Respond in EXACTLY this format:
+
+    Role:
+    <your assigned role>
+
+    Proposed final answer:
+    \boxed{<your best concrete answer; required and must be concrete>}
+
+    Reasoning direction:
+    <1-3 sentences describing the approach you took>
+
+    Key idea:
+    <the single most load-bearing insight in your attempt>
+
+    Critical assumption:
+    <the assumption your answer most depends on, which could be wrong>
+
+    What another solver should check:
+    <one concrete thing a verifier should check about your reasoning>
+
+    Confidence / uncertainty:
+    <low / medium / high, and one phrase on why>
+
+  integrator_prepend_prompt: &integrator_prepend_prompt |-
+    You are the final integrator. Several independent agents have each proposed a
+    hypothesis for the following problem, from different perspectives:
+
+    ${task_description}
+
+    Below are their hypotheses. Some proposed answers may be wrong, but their
+    reasoning directions, key ideas, or checks may still be useful. Do NOT
+    blindly copy any proposed answer. Treat the hypotheses as evidence. Verify
+    the reasoning yourself, reconcile disagreements, and synthesize your OWN
+    final answer.
+
+    ${hypotheses_block}
+
+  integrator_append_prompt: &integrator_append_prompt |-
+    Think step by step. You may adopt, combine, correct, or reject parts of any
+    hypothesis, but justify your synthesis. Then give your final answer.
+
+    Final answer:
+    \boxed{<your synthesized final answer>}
+
+  evaluator_prepend_prompt: &evaluator_prepend_prompt |-
+    You are the Evaluator for a multi-agent reasoning system.
+
+    Problem:
+    ${task_description}
+
+    MAS final submission:
+    ${solution}
+
+    Ground truth / evaluator-only reference material:
+    ${result}
+
+    Requirements:
+      - Decide whether the MAS final answer is mathematically equivalent to the ground truth.
+      - Focus on the final answer, not stylistic wording.
+      - The final answer may be numeric, symbolic, formulaic, set-valued, or conditional.
+      - Do not reveal, quote, restate, or hint at the ground truth in your response.
+      - Output a clear verdict label: `Verdict: PASS` or `Verdict: FAIL`.
+      - If the answer is equivalent, output `Correctness: 1`. Otherwise `Correctness: 0`.
+
+  evaluator_append_prompt: &evaluator_append_prompt |-
+    Output format:
+    Verdict: PASS or FAIL
+    Correctness: 0 or 1
+    Response: <brief non-leaking note>
+
+name: diverse-hypothesis
+
+environment:
+  env_type: task-diverse-hypothesis
+  max_rounds: *max_rounds
+  rule:
+    cnt_roster: *cnt_roster
+    n_hypothesizers: 5         # K; override per run
+    rounds: 1                  # single-turn deliberation
+    exposure_condition: none   # live = score-free placebo; score exposure is offline
+    evaluator:
+      type: llm                # model-API judge for semantic equivalence across
+                               # all benchmarks (handles LaTeX/units/MCQ formats)
+
+agents:
+  - agent_type: role_assigner
+    name: Recruiter
+    prepend_prompt_template: *recruiter_prepend_prompt
+    append_prompt_template: *recruiter_append_prompt
+    max_retry: 10
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: primary-actor-model
+      temperature: 0
+      max_tokens: 2048
+    output_parser:
+      type: dhd_recruiter
+
+  # Hypothesizer agents are written out in full (no YAML merge anchors) because
+  # the loader mutates each agent's llm/memory/output_parser dict in place, so
+  # sharing those dicts via a merge anchor would corrupt later agents. Roles here
+  # are fallbacks; the recruiter overwrites role_description per problem.
+  - agent_type: hypothesizer
+    name: Hypothesizer 1
+    role_description: |-
+      Decomposer: break the problem into stable sub-problems and solve bottom-up.
+    prepend_prompt_template: *hypothesizer_prepend_prompt
+    append_prompt_template: *hypothesizer_append_prompt
+    max_retry: 10
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: primary-actor-model
+      temperature: 0.7
+      max_tokens: 4096
+    output_parser:
+      type: dhd_hypothesis
+
+  - agent_type: hypothesizer
+    name: Hypothesizer 2
+    role_description: |-
+      First-principles: re-derive the answer from definitions / governing equations.
+    prepend_prompt_template: *hypothesizer_prepend_prompt
+    append_prompt_template: *hypothesizer_append_prompt
+    max_retry: 10
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: primary-actor-model
+      temperature: 0.7
+      max_tokens: 4096
+    output_parser:
+      type: dhd_hypothesis
+
+  - agent_type: hypothesizer
+    name: Hypothesizer 3
+    role_description: |-
+      Analogy/transfer: map the problem to a known solved problem or canonical method.
+    prepend_prompt_template: *hypothesizer_prepend_prompt
+    append_prompt_template: *hypothesizer_append_prompt
+    max_retry: 10
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: primary-actor-model
+      temperature: 0.7
+      max_tokens: 4096
+    output_parser:
+      type: dhd_hypothesis
+
+  - agent_type: hypothesizer
+    name: Hypothesizer 4
+    role_description: |-
+      Constraint/edge-case: start from boundary conditions, units, and limiting cases.
+    prepend_prompt_template: *hypothesizer_prepend_prompt
+    append_prompt_template: *hypothesizer_append_prompt
+    max_retry: 10
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: primary-actor-model
+      temperature: 0.7
+      max_tokens: 4096
+    output_parser:
+      type: dhd_hypothesis
+
+  - agent_type: hypothesizer
+    name: Hypothesizer 5
+    role_description: |-
+      Estimation/sanity-first: get a bounding / order-of-magnitude answer, then refine.
+    prepend_prompt_template: *hypothesizer_prepend_prompt
+    append_prompt_template: *hypothesizer_append_prompt
+    max_retry: 10
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: primary-actor-model
+      temperature: 0.7
+      max_tokens: 4096
+    output_parser:
+      type: dhd_hypothesis
+
+  - agent_type: integrator
+    name: Integrator
+    role_description: |-
+      Final integrator who synthesizes the independent hypotheses into one answer.
+    prepend_prompt_template: *integrator_prepend_prompt
+    append_prompt_template: *integrator_append_prompt
+    max_retry: 10
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: primary-actor-model
+      temperature: 0
+      max_tokens: 4096
+    output_parser:
+      type: dhd_integrator
+
+  - agent_type: evaluator
+    name: Evaluator
+    role_description: |-
+      Evaluator
+    prepend_prompt_template: *evaluator_prepend_prompt
+    append_prompt_template: *evaluator_append_prompt
+    max_retry: 10
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: judge-model
+      temperature: 0
+      max_tokens: 4096
+    output_parser:
+      type: mgsm-evaluator
+      dimensions:
+        - Correctness

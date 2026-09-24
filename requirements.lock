@@ -1,0 +1,12 @@
+# Tested with CPython 3.13.0. These are the versions used to produce the
+# reference figures and to run the test suite. The runtime protocol path
+# (src/dhd) uses only the Python standard library; the pins below cover the
+# analysis, figure, and test dependencies.
+matplotlib==3.10.9
+numpy==2.4.4
+PyYAML==6.0.3
+pytest==9.1.1
+# zstandard is only needed for the analysis scripts that read compressed raw
+# release shards (run_offline_review_closure.py, run_majority_diagnostic.py).
+# It is optional for the shipped analysis reproduction, which uses plain CSVs.
+zstandard==0.23.0

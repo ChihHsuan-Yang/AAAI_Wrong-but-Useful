@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use this code or dataset, please cite the paper."
+title: "Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages"
+authors:
+  - family-names: Yang
+    given-names: Chih-Hsuan
+    affiliation: Argonne National Laboratory
+  - family-names: Chowdhury
+    given-names: Anjir Ahmed
+    affiliation: University of Houston
+  - family-names: Yang
+    given-names: Cheng-Hau
+    affiliation: Argonne National Laboratory
+  - family-names: Zheng
+    given-names: Weijian
+    affiliation: Argonne National Laboratory
+  - family-names: Llorente
+    given-names: Fernando
+    affiliation: Brookhaven National Laboratory
+  - family-names: Ma
+    given-names: Xiaolong
+    affiliation: Argonne National Laboratory
+  - family-names: Li
+    given-names: Xinyang
+    affiliation: University of Houston
+  - family-names: Huerta
+    given-names: Eliu A.
+    affiliation: Argonne National Laboratory
+  - family-names: Foster
+    given-names: Ian T.
+    affiliation: University of Chicago
+  - family-names: Thakur
+    given-names: Rajeev
+    affiliation: Argonne National Laboratory
+year: 2026
+identifiers:
+  - type: other
+    value: "arXiv:2608.14375"
+    description: arXiv preprint
+url: "https://arxiv.org/abs/2608.14375"
+preferred-citation:
+  type: article
+  title: "Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages"
+  year: 2026
+  journal: "arXiv preprint arXiv:2608.14375"
+  authors:
+    - family-names: Yang
+      given-names: Chih-Hsuan

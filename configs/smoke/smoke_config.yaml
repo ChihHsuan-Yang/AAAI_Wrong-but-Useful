@@ -1,0 +1,92 @@
+# Smoke-test configuration. Identical prompt contract to configs/paper, reduced
+# token budgets for a fast fixture-based end-to-end check. The model is resolved
+# from the generic MODEL_API_MODEL environment variable at run time; the value
+# below is a placeholder used only when that variable is unset.
+
+name: diverse-hypothesis-smoke
+
+environment:
+  env_type: task-diverse-hypothesis
+  max_rounds: 1
+  rule:
+    cnt_roster: 5
+    n_hypothesizers: 5
+    rounds: 1
+    exposure_condition: none
+    evaluator:
+      type: llm
+
+agents:
+  - agent_type: integrator
+    name: Integrator
+    role_description: |-
+      Final integrator who synthesizes the independent hypotheses into one answer.
+    prepend_prompt_template: |-
+      You are the final integrator. Several independent agents have each proposed a
+      hypothesis for the following problem, from different perspectives:
+
+      ${task_description}
+
+      Below are their hypotheses. Some proposed answers may be wrong, but their
+      reasoning directions, key ideas, or checks may still be useful. Do NOT
+      blindly copy any proposed answer. Treat the hypotheses as evidence. Verify
+      the reasoning yourself, reconcile disagreements, and synthesize your OWN
+      final answer.
+
+      ${hypotheses_block}
+    append_prompt_template: |-
+      Think step by step. You may adopt, combine, correct, or reject parts of any
+      hypothesis, but justify your synthesis. Then give your final answer.
+
+      Final answer:
+      \boxed{<your synthesized final answer>}
+    max_retry: 3
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: smoke-actor-model
+      temperature: 0
+      max_tokens: 512
+    output_parser:
+      type: dhd_integrator
+
+  - agent_type: evaluator
+    name: Evaluator
+    role_description: |-
+      Evaluator
+    prepend_prompt_template: |-
+      You are the Evaluator for a multi-agent reasoning system.
+
+      Problem:
+      ${task_description}
+
+      MAS final submission:
+      ${solution}
+
+      Ground truth / evaluator-only reference material:
+      ${result}
+
+      Requirements:
+        - Decide whether the MAS final answer is mathematically equivalent to the ground truth.
+        - Focus on the final answer, not stylistic wording.
+        - Do not reveal, quote, restate, or hint at the ground truth in your response.
+        - Output a clear verdict label: `Verdict: PASS` or `Verdict: FAIL`.
+        - If the answer is equivalent, output `Correctness: 1`. Otherwise `Correctness: 0`.
+    append_prompt_template: |-
+      Output format:
+      Verdict: PASS or FAIL
+      Correctness: 0 or 1
+      Response: <brief non-leaking note>
+    max_retry: 3
+    memory:
+      memory_type: chat_history
+    llm:
+      llm_type: openai_compatible
+      model: judge-model
+      temperature: 0
+      max_tokens: 512
+    output_parser:
+      type: mgsm-evaluator
+      dimensions:
+        - Correctness

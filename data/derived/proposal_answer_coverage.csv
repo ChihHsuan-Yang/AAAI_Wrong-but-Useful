@@ -1,0 +1,13 @@
+model,benchmark,eligible_proposals,answer_bearing_proposals,fully_structured_proposals,eligible_loo_labels
+OSS,Omni-MATH-2,20862,20862,20854,58417
+OSS,JEEBench,2510,2510,2493,7020
+OSS,SciBench,2886,2886,2883,8074
+OSS,LAB-Bench,3292,3292,3251,9143
+OSS,MaScQA,3245,3245,3244,9086
+OSS,Pooled,32795,32795,32725,91740
+Gemma,Omni-MATH-2,18620,18620,18277,52136
+Gemma,JEEBench,2500,2500,2470,7000
+Gemma,SciBench,2885,2885,2876,8078
+Gemma,LAB-Bench,2410,2410,2403,6748
+Gemma,MaScQA,3235,3235,3232,9058
+Gemma,Pooled,29650,29650,29258,83020

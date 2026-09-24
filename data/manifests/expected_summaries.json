@@ -1,0 +1,56 @@
+{
+  "cross_benchmark_pooled": {
+    "Gemma|correct": {
+      "harmful": 132,
+      "helpful": 455,
+      "neutral": 33008
+    },
+    "Gemma|wrong": {
+      "harmful": 1930,
+      "helpful": 1601,
+      "neutral": 45894
+    },
+    "OSS|correct": {
+      "harmful": 1311,
+      "helpful": 2461,
+      "neutral": 62131
+    },
+    "OSS|wrong": {
+      "harmful": 2251,
+      "helpful": 1623,
+      "neutral": 21963
+    }
+  },
+  "helpful_share_among_flips_pct": {
+    "Gemma|correct": 77.5128,
+    "Gemma|wrong": 45.3413,
+    "OSS|correct": 65.2439,
+    "OSS|wrong": 41.8947
+  },
+  "loo_taxonomy": {
+    "Gemma|correct": {
+      "eligible": 33595,
+      "harmful": 132,
+      "helpful": 455,
+      "neutral": 33008
+    },
+    "Gemma|wrong": {
+      "eligible": 49425,
+      "harmful": 1930,
+      "helpful": 1601,
+      "neutral": 45894
+    },
+    "OSS|correct": {
+      "eligible": 65903,
+      "harmful": 1311,
+      "helpful": 2461,
+      "neutral": 62131
+    },
+    "OSS|wrong": {
+      "eligible": 25837,
+      "harmful": 2251,
+      "helpful": 1623,
+      "neutral": 21963
+    }
+  }
+}

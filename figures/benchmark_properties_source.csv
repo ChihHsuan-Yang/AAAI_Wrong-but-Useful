@@ -1,0 +1,6 @@
+benchmark,discipline,answer_structure,question_structure,source_problem_count,prompt_chars_median
+Omni-MATH-2,Competition mathematics,Open-ended exact answer,Multi-step derivation,4181,224
+JEEBench,"Mathematics, physics, chemistry","Single-choice, multi-choice, integer, numeric",Mixed-format multi-step reasoning,515,820
+SciBench,College mathematics and science,Numeric or short answer,Calculation with units,580,586
+LAB-Bench,Biology laboratory research,Multiple choice,Long in-prompt evidence,741,1762
+MaScQA,Materials science,"Multiple choice, matching, numeric",Conceptual and computational,650,686

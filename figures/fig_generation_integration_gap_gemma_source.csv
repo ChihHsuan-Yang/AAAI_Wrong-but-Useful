@@ -1,0 +1,6 @@
+benchmark,independent_k0_accuracy_pct,full_k5_accuracy_pct,at_least_one_correct_proposal_pct,n_problems,analysis_scope
+Omni-MATH-2,82.4382,80.9613,53.1686,3724,complete_loo
+JEEBench,89.8000,89.4000,63.6000,500,complete_loo
+SciBench,73.1369,73.8302,40.0347,577,complete_loo
+LAB-Bench,77.5934,78.0083,82.1577,482,complete_loo
+MaScQA,95.3632,93.5085,80.3709,647,complete_loo

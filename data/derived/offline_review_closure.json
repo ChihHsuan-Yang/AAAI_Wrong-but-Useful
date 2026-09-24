@@ -1,0 +1,236 @@
+{
+  "analysis_version": "offline_review_closure_v3",
+  "bootstrap_iterations": 10000,
+  "bootstrap_seed": 20260724,
+  "models": {
+    "gemma_4_31b": {
+      "benchmark_policy_diagnostics": {
+        "jeebench": {
+          "benchmark": "jeebench",
+          "best_minus_correctness_ci95_high": 6.263,
+          "best_minus_correctness_ci95_low": 3.472,
+          "best_minus_correctness_points": 4.825,
+          "best_single_accuracy_percent": 93.849,
+          "confidence_accuracy_percent": 88.092,
+          "consensus_accuracy_percent": 88.968,
+          "correctness_minus_random_ci95_high": 0.909,
+          "correctness_minus_random_ci95_low": 0.106,
+          "correctness_minus_random_points": 0.453,
+          "correctness_oracle_accuracy_percent": 89.024,
+          "eligible_problems": 504,
+          "model": "gemma_4_31b",
+          "random_accuracy_percent": 88.571
+        },
+        "labbench": {
+          "benchmark": "labbench",
+          "best_minus_correctness_ci95_high": 6.673,
+          "best_minus_correctness_ci95_low": 3.751,
+          "best_minus_correctness_points": 5.18,
+          "best_single_accuracy_percent": 87.375,
+          "confidence_accuracy_percent": 76.754,
+          "consensus_accuracy_percent": 75.868,
+          "correctness_minus_random_ci95_high": 7.458,
+          "correctness_minus_random_ci95_low": 4.455,
+          "correctness_minus_random_points": 5.922,
+          "correctness_oracle_accuracy_percent": 82.194,
+          "eligible_problems": 499,
+          "model": "gemma_4_31b",
+          "random_accuracy_percent": 76.273
+        },
+        "mascqa": {
+          "benchmark": "mascqa",
+          "best_minus_correctness_ci95_high": 2.7,
+          "best_minus_correctness_ci95_low": 1.123,
+          "best_minus_correctness_points": 1.855,
+          "best_single_accuracy_percent": 97.991,
+          "confidence_accuracy_percent": 94.967,
+          "consensus_accuracy_percent": 94.704,
+          "correctness_minus_random_ci95_high": 2.061,
+          "correctness_minus_random_ci95_low": 0.69,
+          "correctness_minus_random_points": 1.329,
+          "correctness_oracle_accuracy_percent": 96.136,
+          "eligible_problems": 647,
+          "model": "gemma_4_31b",
+          "random_accuracy_percent": 94.807
+        },
+        "omnimath2": {
+          "benchmark": "omnimath2",
+          "best_minus_correctness_ci95_high": 6.653,
+          "best_minus_correctness_ci95_low": 5.535,
+          "best_minus_correctness_points": 6.079,
+          "best_single_accuracy_percent": 87.219,
+          "confidence_accuracy_percent": 79.529,
+          "consensus_accuracy_percent": 80.038,
+          "correctness_minus_random_ci95_high": 1.254,
+          "correctness_minus_random_ci95_low": 0.827,
+          "correctness_minus_random_points": 1.035,
+          "correctness_oracle_accuracy_percent": 81.141,
+          "eligible_problems": 3787,
+          "model": "gemma_4_31b",
+          "random_accuracy_percent": 80.106
+        },
+        "scibench": {
+          "benchmark": "scibench",
+          "best_minus_correctness_ci95_high": 8.667,
+          "best_minus_correctness_ci95_low": 5.466,
+          "best_minus_correctness_points": 7.023,
+          "best_single_accuracy_percent": 80.517,
+          "confidence_accuracy_percent": 72.293,
+          "consensus_accuracy_percent": 72.595,
+          "correctness_minus_random_ci95_high": 1.615,
+          "correctness_minus_random_ci95_low": 0.397,
+          "correctness_minus_random_points": 0.977,
+          "correctness_oracle_accuracy_percent": 73.494,
+          "eligible_problems": 580,
+          "model": "gemma_4_31b",
+          "random_accuracy_percent": 72.517
+        }
+      },
+      "eligible_problems": 6017,
+      "proposal_correctness_oracle_regret_points": 5.535981,
+      "regret_source_counts": {
+        "correct_proposals_have_mixed_downstream_success": 88,
+        "no_correct_proposal_but_a_wrong_proposal_succeeds": 641,
+        "no_correctness_oracle_regret": 5280,
+        "only_wrong_proposals_succeed_downstream": 8
+      },
+      "source_counts": {
+        "jeebench": {
+          "eligible": 504,
+          "excluded": 11
+        },
+        "labbench": {
+          "eligible": 499,
+          "excluded": 242
+        },
+        "mascqa": {
+          "eligible": 647,
+          "excluded": 2
+        },
+        "omnimath2": {
+          "eligible": 3787,
+          "excluded": 394
+        },
+        "scibench": {
+          "eligible": 580,
+          "excluded": 0
+        }
+      }
+    },
+    "gpt_oss_120b": {
+      "benchmark_policy_diagnostics": {
+        "jeebench": {
+          "benchmark": "jeebench",
+          "best_minus_correctness_ci95_high": 7.278,
+          "best_minus_correctness_ci95_low": 4.259,
+          "best_minus_correctness_points": 5.709,
+          "best_single_accuracy_percent": 94.175,
+          "confidence_accuracy_percent": 85.042,
+          "consensus_accuracy_percent": 85.864,
+          "correctness_minus_random_ci95_high": 5.007,
+          "correctness_minus_random_ci95_low": 2.663,
+          "correctness_minus_random_points": 3.806,
+          "correctness_oracle_accuracy_percent": 88.466,
+          "eligible_problems": 515,
+          "model": "gpt_oss_120b",
+          "random_accuracy_percent": 84.66
+        },
+        "labbench": {
+          "benchmark": "labbench",
+          "best_minus_correctness_ci95_high": 20.144,
+          "best_minus_correctness_ci95_low": 15.81,
+          "best_minus_correctness_points": 17.982,
+          "best_single_accuracy_percent": 63.698,
+          "confidence_accuracy_percent": 38.794,
+          "consensus_accuracy_percent": 39.233,
+          "correctness_minus_random_ci95_high": 8.774,
+          "correctness_minus_random_ci95_low": 5.839,
+          "correctness_minus_random_points": 7.281,
+          "correctness_oracle_accuracy_percent": 45.715,
+          "eligible_problems": 741,
+          "model": "gpt_oss_120b",
+          "random_accuracy_percent": 38.435
+        },
+        "mascqa": {
+          "benchmark": "mascqa",
+          "best_minus_correctness_ci95_high": 2.036,
+          "best_minus_correctness_ci95_low": 0.686,
+          "best_minus_correctness_points": 1.31,
+          "best_single_accuracy_percent": 94.607,
+          "confidence_accuracy_percent": 90.195,
+          "consensus_accuracy_percent": 90.55,
+          "correctness_minus_random_ci95_high": 4.373,
+          "correctness_minus_random_ci95_low": 2.368,
+          "correctness_minus_random_points": 3.313,
+          "correctness_oracle_accuracy_percent": 93.297,
+          "eligible_problems": 649,
+          "model": "gpt_oss_120b",
+          "random_accuracy_percent": 89.985
+        },
+        "omnimath2": {
+          "benchmark": "omnimath2",
+          "best_minus_correctness_ci95_high": 7.235,
+          "best_minus_correctness_ci95_low": 6.034,
+          "best_minus_correctness_points": 6.628,
+          "best_single_accuracy_percent": 86.702,
+          "confidence_accuracy_percent": 76.086,
+          "consensus_accuracy_percent": 75.985,
+          "correctness_minus_random_ci95_high": 5.254,
+          "correctness_minus_random_ci95_low": 4.308,
+          "correctness_minus_random_points": 4.776,
+          "correctness_oracle_accuracy_percent": 80.073,
+          "eligible_problems": 4181,
+          "model": "gpt_oss_120b",
+          "random_accuracy_percent": 75.298
+        },
+        "scibench": {
+          "benchmark": "scibench",
+          "best_minus_correctness_ci95_high": 5.968,
+          "best_minus_correctness_ci95_low": 3.27,
+          "best_minus_correctness_points": 4.56,
+          "best_single_accuracy_percent": 84.828,
+          "confidence_accuracy_percent": 78.448,
+          "consensus_accuracy_percent": 78.126,
+          "correctness_minus_random_ci95_high": 3.296,
+          "correctness_minus_random_ci95_low": 1.509,
+          "correctness_minus_random_points": 2.371,
+          "correctness_oracle_accuracy_percent": 80.267,
+          "eligible_problems": 580,
+          "model": "gpt_oss_120b",
+          "random_accuracy_percent": 77.897
+        }
+      },
+      "eligible_problems": 6666,
+      "proposal_correctness_oracle_regret_points": 7.121712,
+      "regret_source_counts": {
+        "correct_proposals_have_mixed_downstream_success": 566,
+        "no_correct_proposal_but_a_wrong_proposal_succeeds": 246,
+        "no_correctness_oracle_regret": 5763,
+        "only_wrong_proposals_succeed_downstream": 91
+      },
+      "source_counts": {
+        "jeebench": {
+          "eligible": 515,
+          "excluded": 0
+        },
+        "labbench": {
+          "eligible": 741,
+          "excluded": 0
+        },
+        "mascqa": {
+          "eligible": 649,
+          "excluded": 0
+        },
+        "omnimath2": {
+          "eligible": 4181,
+          "excluded": 0
+        },
+        "scibench": {
+          "eligible": 580,
+          "excluded": 0
+        }
+      }
+    }
+  },
+  "release_root": "<PUBLIC_RELEASE_ROOT>"
+}

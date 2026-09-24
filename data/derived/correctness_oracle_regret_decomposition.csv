@@ -1,0 +1,11 @@
+model,source,problems,problem_share_percent,regret_contribution_points,share_of_total_correctness_oracle_regret_percent
+gpt_oss_120b,no_correctness_oracle_regret,5763,86.454,0.0,0.0
+gpt_oss_120b,no_correct_proposal_but_a_wrong_proposal_succeeds,246,3.69,2.541,35.683
+gpt_oss_120b,only_wrong_proposals_succeed_downstream,91,1.365,1.365,19.169
+gpt_oss_120b,correct_proposals_have_mixed_downstream_success,566,8.491,3.215,45.148
+gpt_oss_120b,other,0,0.0,0.0,0.0
+gemma_4_31b,no_correctness_oracle_regret,5280,87.751,0.0,0.0
+gemma_4_31b,no_correct_proposal_but_a_wrong_proposal_succeeds,641,10.653,4.87,87.962
+gemma_4_31b,only_wrong_proposals_succeed_downstream,8,0.133,0.133,2.402
+gemma_4_31b,correct_proposals_have_mixed_downstream_success,88,1.463,0.533,9.637
+gemma_4_31b,other,0,0.0,0.0,0.0

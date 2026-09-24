@@ -1,0 +1,207 @@
+{
+  "benchmarks": {
+    "JEEBench": {
+      "ci95": {
+        "correct": [
+          -0.004728988469781234,
+          0.012127984784505495
+        ],
+        "correct_minus_wrong": [
+          0.024727903900997,
+          0.11734270513941993
+        ],
+        "wrong": [
+          -0.11560115886045388,
+          -0.02
+        ]
+      },
+      "correct": 0.0037757437070938212,
+      "correct_minus_wrong": 0.06726780719915731,
+      "n_correct": 874,
+      "n_problems": 200,
+      "n_signals": 1000,
+      "n_wrong": 126,
+      "stable_correct": {
+        "indeterminate": 868,
+        "stable_harmful": 4,
+        "stable_helpful": 2
+      },
+      "stable_wrong": {
+        "indeterminate": 119,
+        "stable_harmful": 7
+      },
+      "wrong": -0.06349206349206349
+    },
+    "LAB-Bench": {
+      "ci95": {
+        "correct": [
+          0.011663057584064752,
+          0.0727792806495303
+        ],
+        "correct_minus_wrong": [
+          0.021836019923750873,
+          0.08963822733817761
+        ],
+        "wrong": [
+          -0.036465527023960054,
+          0.008333333333333333
+        ]
+      },
+      "correct": 0.04189435336976321,
+      "correct_minus_wrong": 0.055863311241160105,
+      "n_correct": 549,
+      "n_problems": 200,
+      "n_signals": 1000,
+      "n_wrong": 451,
+      "stable_correct": {
+        "indeterminate": 498,
+        "stable_harmful": 16,
+        "stable_helpful": 35
+      },
+      "stable_wrong": {
+        "indeterminate": 428,
+        "stable_harmful": 9,
+        "stable_helpful": 14
+      },
+      "wrong": -0.013968957871396898
+    },
+    "MaScQA": {
+      "ci95": {
+        "correct": [
+          -0.006964214782323996,
+          0.011913077142110456
+        ],
+        "correct_minus_wrong": [
+          -0.016425878144536814,
+          0.08562988005472873
+        ],
+        "wrong": [
+          -0.08526491228070177,
+          0.020689655172413793
+        ]
+      },
+      "correct": 0.0028729281767955798,
+      "correct_minus_wrong": 0.030241349229427155,
+      "n_correct": 905,
+      "n_problems": 200,
+      "n_signals": 1000,
+      "n_wrong": 95,
+      "stable_correct": {
+        "indeterminate": 898,
+        "stable_harmful": 4,
+        "stable_helpful": 3
+      },
+      "stable_wrong": {
+        "indeterminate": 90,
+        "stable_harmful": 4,
+        "stable_helpful": 1
+      },
+      "wrong": -0.027368421052631577
+    },
+    "Omni-MATH-2": {
+      "ci95": {
+        "correct": [
+          0.006616830690928746,
+          0.04610644058476874
+        ],
+        "correct_minus_wrong": [
+          0.0013649687238386483,
+          0.05158158181548495
+        ],
+        "wrong": [
+          -0.02035047130865556,
+          0.020741228070175432
+        ]
+      },
+      "correct": 0.026226993865030676,
+      "correct_minus_wrong": 0.026226993865030676,
+      "n_correct": 652,
+      "n_problems": 200,
+      "n_signals": 1000,
+      "n_wrong": 348,
+      "stable_correct": {
+        "indeterminate": 616,
+        "stable_harmful": 13,
+        "stable_helpful": 23
+      },
+      "stable_wrong": {
+        "indeterminate": 334,
+        "stable_harmful": 7,
+        "stable_helpful": 7
+      },
+      "wrong": 0.0
+    },
+    "SciBench": {
+      "ci95": {
+        "correct": [
+          -0.004423652750121441,
+          0.015633423180592992
+        ],
+        "correct_minus_wrong": [
+          0.0005715130988361475,
+          0.04560609191810832
+        ],
+        "wrong": [
+          -0.04063826035570636,
+          0.004947288496919074
+        ]
+      },
+      "correct": 0.005319148936170212,
+      "correct_minus_wrong": 0.022254632807137957,
+      "n_correct": 752,
+      "n_problems": 200,
+      "n_signals": 1000,
+      "n_wrong": 248,
+      "stable_correct": {
+        "indeterminate": 742,
+        "stable_harmful": 3,
+        "stable_helpful": 7
+      },
+      "stable_wrong": {
+        "indeterminate": 237,
+        "stable_harmful": 10,
+        "stable_helpful": 1
+      },
+      "wrong": -0.016935483870967744
+    }
+  },
+  "design": {
+    "bootstrap_unit": "problem within benchmark, then matched replay block within problem; all five signals share sampled block indices",
+    "estimand": "mean repeated trajectory-value estimate, stratified by proposal correctness",
+    "iterations": 10000,
+    "seed": 20260724
+  },
+  "pooled": {
+    "ci95": {
+      "correct": [
+        0.006547833738075424,
+        0.020214136803466343
+      ],
+      "correct_minus_wrong": [
+        0.01722376561164445,
+        0.04277243502744336
+      ],
+      "wrong": [
+        -0.02914365676609346,
+        -0.004479731843575424
+      ]
+    },
+    "correct": 0.01339764201500536,
+    "correct_minus_wrong": 0.030038020563901258,
+    "n_correct": 3732,
+    "n_problems": 1000,
+    "n_signals": 5000,
+    "n_wrong": 1268,
+    "stable_correct": {
+      "indeterminate": 3622,
+      "stable_harmful": 40,
+      "stable_helpful": 70
+    },
+    "stable_wrong": {
+      "indeterminate": 1208,
+      "stable_harmful": 37,
+      "stable_helpful": 23
+    },
+    "wrong": -0.0166403785488959
+  }
+}

@@ -1,0 +1,167 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests and offline reproduction (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The floor is 3.11, set by the PINS and not by the source:
+        # numpy==2.4.4 declares requires_python >= 3.11, so the lockfile does
+        # not install on 3.10 even though pyproject.toml says >= 3.10.
+        # Do not add 3.10 or 3.9 here; they cannot install requirements.lock.
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install pinned dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.lock
+
+      - name: Unit tests
+        run: python -m pytest
+
+      - name: Validate shipped data against the manifest
+        run: python scripts/validate_inputs.py
+
+      # Pass PYTHON explicitly: the wrappers fall back to `python3`, which
+      # resolves against PATH and would not necessarily be this matrix job's
+      # interpreter. This also exercises the override the README documents.
+      - name: Offline analysis reproduction
+        env:
+          PYTHON: python
+        run: bash scripts/reproduce_analysis.sh "${RUNNER_TEMP}/reproduced"
+
+      - name: Assert both documented PASS lines were printed
+        env:
+          PYTHON: python
+        run: |
+          set -euo pipefail
+          out="$(bash scripts/reproduce_analysis.sh "${RUNNER_TEMP}/reproduced2")"
+          echo "$out"
+          echo "$out" | grep -q "PASS: recomputed headline summary matches expected manifest."
+          echo "$out" | grep -q "PASS: recomputed matched-sensitivity and cross-fitted tables match expected manifest"
+
+      - name: Smoke test must skip cleanly with no endpoint configured
+        env:
+          PYTHON: python
+        run: |
+          set -euo pipefail
+          out="$(bash scripts/run_smoke_test.sh "${RUNNER_TEMP}/smoke")"
+          echo "$out"
+          echo "$out" | grep -q "^SKIP: model API is not configured"
+
+      - name: Dry run must not require an endpoint
+        run: python scripts/dry_run.py
+
+      # The R13 guard, end to end: a single global model variable makes the
+      # integrator and the evaluator collapse onto one identifier, which the
+      # paper's design forbids. Both entry points must refuse it.
+      - name: The collapsed single-model configuration must be REFUSED
+        env:
+          MODEL_API_BASE: http://127.0.0.1:9/v1
+          MODEL_API_MODEL: one-model-for-everything
+        run: |
+          set -euo pipefail
+          set +e
+          out="$(python scripts/dry_run.py 2>&1)"; code=$?
+          set -e
+          echo "$out"
+          [ "$code" -eq 2 ] || { echo "CONTROL FAILED: dry_run accepted the collapse (exit $code)"; exit 1; }
+          echo "$out" | grep -q "different model slots"
+          echo "CONTROL PASSED: the actor/evaluator collapse is refused."
+
+  portability:
+    name: Portability audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Run the audit's own controls FIRST. A scan whose patterns cannot fire
+      # reports zero findings and looks clean, which is the failure mode this
+      # step exists to rule out: --self-test requires every pattern to match a
+      # string that must match and reject one that must not.
+      - name: Prove every audit pattern can fire
+        run: python tools/portability_audit.py --self-test
+
+      # Second control: plant a violation of each class in a scratch COPY and
+      # require the audit to catch it. This checks the scanner against the whole
+      # repository as it will actually run, not just against unit strings.
+      - name: Positive control -- planted violations must be detected
+        run: |
+          set -euo pipefail
+          scratch="${RUNNER_TEMP}/planted"
+          rm -rf "$scratch"
+          cp -R . "$scratch"
+          rm -rf "$scratch/.git"
+          python - "$scratch" <<'PY'
+          import pathlib, sys
+          root = pathlib.Path(sys.argv[1])
+          # Assembled from fragments so this workflow file does not itself
+          # contain the literals the audit forbids.
+          planted = "\n".join([
+              "# planted author path: /" + "Us" + "ers" + "/someone/project",
+              "# planted cluster path: /" + "l" + "us" + "/" + "ea" + "gle"
+              + "/scratch",
+              "# planted endpoint: https://" + "inference-api" + "." + "alcf"
+              + "." + "anl" + "." + "gov" + "/v1",
+              "# planted proxy: http://" + "proxy" + "." + "alcf" + "." + "anl"
+              + "." + "gov" + ":3128",
+              "# planted credential: " + "s" + "k" + "-AAAAAAAAAAAAAAAAAAAAAAAA",
+              "# planted stale name: " + "mas" + "-" + "eval",
+              "# planted anonymity: Copyright (c) 2026 " + "Anony" + "mous "
+              + "Auth" + "ors",
+          ])
+          # Plant INSIDE an allowlisted file: an allowlist keyed on a path alone
+          # would exempt the whole file, and this proves ours is not.
+          target = root / "release_notes" / "PROVENANCE.md"
+          target.write_text(target.read_text() + "\n" + planted + "\n")
+          PY
+          set +e
+          out="$(python tools/portability_audit.py --root "$scratch" --allow-unused)"
+          code=$?
+          set -e
+          echo "$out"
+          if [ "$code" -eq 0 ]; then
+            echo "CONTROL FAILED: the audit passed a tree with planted violations."
+            echo "The audit is not discriminating and its clean results mean nothing."
+            exit 1
+          fi
+          for cls in author_path private_url credential stale_name review_anonymity; do
+            echo "$out" | grep -q "\[$cls/" || {
+              echo "CONTROL FAILED: class '$cls' was planted but not reported."
+              exit 1
+            }
+          done
+          echo "CONTROL PASSED: all five classes detected inside an allowlisted file."
+
+      - name: Audit the repository
+        run: python tools/portability_audit.py
+
+      - name: No .env or credential file is tracked
+        run: |
+          set -euo pipefail
+          if git ls-files | grep -Ev '^\.env\.example$' | grep -E '(^|/)\.env($|\.)|\.(key|pem|p12|pfx)$|credentials.*\.json$'; then
+            echo "A credential-shaped file is tracked."
+            exit 1
+          fi
+          echo "No credential-shaped file is tracked."

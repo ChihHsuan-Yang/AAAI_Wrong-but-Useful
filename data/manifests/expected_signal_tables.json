@@ -1,0 +1,60 @@
+{
+  "tab_cross_fitted_one_removal": {
+    "by_benchmark": {
+      "JEEBench": {
+        "gemma": 2.0,
+        "oss": 2.75
+      },
+      "LAB-Bench": {
+        "gemma": 1.4,
+        "oss": 1.95
+      },
+      "MaScQA": {
+        "gemma": 1.95,
+        "oss": 0.55
+      },
+      "Omni-MATH-2": {
+        "gemma": 5.05,
+        "oss": 2.15
+      },
+      "SciBench": {
+        "gemma": 2.66,
+        "oss": 1.0
+      }
+    },
+    "overall": {
+      "gemma": {
+        "cross_fit_pct": 85.73,
+        "full_pct": 83.11,
+        "gain_pp": 2.61,
+        "n_folds": 4995
+      },
+      "oss": {
+        "cross_fit_pct": 73.53,
+        "full_pct": 71.85,
+        "gain_pp": 1.68,
+        "n_folds": 5000
+      }
+    }
+  },
+  "tab_matched_sensitivity": {
+    "integrator_gemma_to_oss": {
+      "exact_sign_pct": 73.8,
+      "mean_shift_pp": 1.35,
+      "nonzero_direction_pct": 50.0,
+      "signals": 500
+    },
+    "order_gemma": {
+      "exact_sign_pct": 93.0,
+      "mean_shift_pp": 0.32,
+      "nonzero_direction_pct": 68.2,
+      "signals": 500
+    },
+    "order_oss": {
+      "exact_sign_pct": 84.2,
+      "mean_shift_pp": 0.59,
+      "nonzero_direction_pct": 55.0,
+      "signals": 500
+    }
+  }
+}

@@ -1,0 +1,11 @@
+model,benchmark,eligible_problems,random_accuracy_percent,consensus_accuracy_percent,confidence_accuracy_percent,correctness_oracle_accuracy_percent,best_single_accuracy_percent,correctness_minus_random_points,correctness_minus_random_ci95_low,correctness_minus_random_ci95_high,best_minus_correctness_points,best_minus_correctness_ci95_low,best_minus_correctness_ci95_high
+gpt_oss_120b,omnimath2,4181,75.298,75.985,76.086,80.073,86.702,4.776,4.308,5.254,6.628,6.034,7.235
+gpt_oss_120b,jeebench,515,84.66,85.864,85.042,88.466,94.175,3.806,2.663,5.007,5.709,4.259,7.278
+gpt_oss_120b,scibench,580,77.897,78.126,78.448,80.267,84.828,2.371,1.509,3.296,4.56,3.27,5.968
+gpt_oss_120b,labbench,741,38.435,39.233,38.794,45.715,63.698,7.281,5.839,8.774,17.982,15.81,20.144
+gpt_oss_120b,mascqa,649,89.985,90.55,90.195,93.297,94.607,3.313,2.368,4.373,1.31,0.686,2.036
+gemma_4_31b,omnimath2,3787,80.106,80.038,79.529,81.141,87.219,1.035,0.827,1.254,6.079,5.535,6.653
+gemma_4_31b,jeebench,504,88.571,88.968,88.092,89.024,93.849,0.453,0.106,0.909,4.825,3.472,6.263
+gemma_4_31b,scibench,580,72.517,72.595,72.293,73.494,80.517,0.977,0.397,1.615,7.023,5.466,8.667
+gemma_4_31b,labbench,499,76.273,75.868,76.754,82.194,87.375,5.922,4.455,7.458,5.18,3.751,6.673
+gemma_4_31b,mascqa,647,94.807,94.704,94.967,96.136,97.991,1.329,0.69,2.061,1.855,1.123,2.7

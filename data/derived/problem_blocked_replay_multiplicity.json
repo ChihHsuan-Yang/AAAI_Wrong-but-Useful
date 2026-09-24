@@ -1,0 +1,1232 @@
+{
+  "analysis": "problem_blocked_repeated_replay_multiplicity",
+  "coverage": {
+    "gemma": {
+      "complete_problems": 999,
+      "incomplete_problems": 1
+    },
+    "oss": {
+      "complete_problems": 1000,
+      "incomplete_problems": 0
+    }
+  },
+  "design": {
+    "multiplicity": "the maximum statistic handles five dependent messages within a problem; BH and BY are then applied across problem-level tests",
+    "permutations": 1000000,
+    "q": 0.05,
+    "randomization": "within each matched replay block, the two full and five removal outcomes are exchangeable under the global no-effect null",
+    "seed": 20260726,
+    "trajectory_value_scale": "stored integer statistic divided by 2 * 5 replay blocks",
+    "unit": "problem",
+    "within_problem_statistic": "maximum directional or absolute repeated full-minus-removal effect across the five messages"
+  },
+  "selected_discoveries": {
+    "gemma": {
+      "any_effect": [
+        {
+          "BH_adjusted_p": 0.03315596684403316,
+          "BY_adjusted_p": 0.2481548676975395,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t10:3594",
+          "raw_p": 0.001204998795001205,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t10:3656",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.02245749754250246,
+          "BY_adjusted_p": 0.1680824859577406,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t10:3825",
+          "raw_p": 0.000561999438000562,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t2:2685",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03171821828178172,
+          "BY_adjusted_p": 0.23739408047857047,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t3:1201",
+          "raw_p": 0.000954999045000955,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03171821828178172,
+          "BY_adjusted_p": 0.23739408047857047,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t3:3008",
+          "raw_p": 0.001015998984001016,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t3:4155",
+          "raw_p": 0.00036999963000037,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03315596684403316,
+          "BY_adjusted_p": 0.2481548676975395,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t4:1061",
+          "raw_p": 0.001204998795001205,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03171821828178172,
+          "BY_adjusted_p": 0.23739408047857047,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t5:1760",
+          "raw_p": 0.000954999045000955,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.02245749754250246,
+          "BY_adjusted_p": 0.1680824859577406,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t6:3454",
+          "raw_p": 0.000553999446000554,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t6:3632",
+          "raw_p": 0.000392999607000393,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03315596684403316,
+          "BY_adjusted_p": 0.2481548676975395,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t6:3691",
+          "raw_p": 0.001204998795001205,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t7:0086",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.047838429434297836,
+          "BY_adjusted_p": 0.35804533111549597,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t7:3071",
+          "raw_p": 0.00208999791000209,
+          "statistic_integer": 8,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:0181",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.02175093279452175,
+          "BY_adjusted_p": 0.1627942226903869,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:0304",
+          "raw_p": 0.000478999521000479,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:3105",
+          "raw_p": 0.00036999963000037,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:4047",
+          "raw_p": 0.000305999694000306,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t9:3067",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03315596684403316,
+          "BY_adjusted_p": 0.2481548676975395,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t9:3882",
+          "raw_p": 0.001182998817001183,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.04345645654354345,
+          "BY_adjusted_p": 0.3252485827029233,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2016 Paper 1:26",
+          "raw_p": 0.00173999826000174,
+          "statistic_integer": 9,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2018 Paper 1:41",
+          "raw_p": 0.000411999588000412,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03315596684403316,
+          "BY_adjusted_p": 0.2481548676975395,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2018 Paper 2:26",
+          "raw_p": 0.001227998772001228,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2018 Paper 2:48",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2019 Paper 1:24",
+          "raw_p": 0.000305999694000306,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2020 Paper 2:27",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.047838429434297836,
+          "BY_adjusted_p": 0.35804533111549597,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2020 Paper 2:54",
+          "raw_p": 0.002011997988002012,
+          "statistic_integer": 8,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:fund:Question 23.23",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:quan:17.9",
+          "raw_p": 0.000305999694000306,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.047838429434297836,
+          "BY_adjusted_p": 0.35804533111549597,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:stat:5.9-1 (a)",
+          "raw_p": 0.002011997988002012,
+          "statistic_integer": 8,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03171821828178172,
+          "BY_adjusted_p": 0.23739408047857047,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:ProtocolQA:74ff0dcc-2f9c-4243-866c-7a2375e6f0a2",
+          "raw_p": 0.000988999011000989,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03171821828178172,
+          "BY_adjusted_p": 0.23739408047857047,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:ProtocolQA:8014d58c-9bed-46d6-8550-6da17740bb66",
+          "raw_p": 0.000914999085000915,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:18cb7836-5712-40a2-806d-ca6f63f1ccc0",
+          "raw_p": 0.000222999777000223,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03396596603403396,
+          "BY_adjusted_p": 0.2542172830321699,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:a2085b17-3ca5-40e0-8f2a-c54f64ea375a",
+          "raw_p": 0.001325998674001326,
+          "statistic_integer": 9,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:a5fb0fba-f514-414c-8fa8-bb298959ca50",
+          "raw_p": 0.000318999681000319,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.047838429434297836,
+          "BY_adjusted_p": 0.35804533111549597,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:de3fb301-86cb-4f48-bce8-8d8dbf72fef4",
+          "raw_p": 0.002106997893002107,
+          "statistic_integer": 8,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03171821828178172,
+          "BY_adjusted_p": 0.23739408047857047,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:ed7a56ed-71cf-4ce3-84ed-05933beff7fa",
+          "raw_p": 0.000942999057000943,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-META-12-41",
+          "raw_p": 0.000305999694000306,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03396596603403396,
+          "BY_adjusted_p": 0.2542172830321699,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-META-15-17",
+          "raw_p": 0.001310998689001311,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03171821828178172,
+          "BY_adjusted_p": 0.23739408047857047,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-META-20-24",
+          "raw_p": 0.000942999057000943,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.02245749754250246,
+          "BY_adjusted_p": 0.1680824859577406,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-META-20-43",
+          "raw_p": 0.000523999476000524,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2013-14",
+          "raw_p": 0.000391999608000392,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2019-16",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.0195994089720196,
+          "BY_adjusted_p": 0.14669120533508964,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2021-15",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        }
+      ],
+      "correct_harmful": [],
+      "off_diagonal": [
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t10:3742",
+          "raw_p": 0.000312999687000313,
+          "statistic_integer": 6,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t3:4155",
+          "raw_p": 0.000350999649000351,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t6:3823",
+          "raw_p": 0.000105999894000106,
+          "statistic_integer": 6,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t7:0086",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:3105",
+          "raw_p": 0.000350999649000351,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t9:3067",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2018 Paper 2:48",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:fund:Question 23.23",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:quan:17.9",
+          "raw_p": 0.000236999763000237,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:18cb7836-5712-40a2-806d-ca6f63f1ccc0",
+          "raw_p": 8.999991000009e-05,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03541905549003542,
+          "BY_adjusted_p": 0.2650928887233857,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2021-15",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        }
+      ],
+      "wrong_helpful": [
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t10:3742",
+          "raw_p": 0.000312999687000313,
+          "statistic_integer": 6,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.046207261485046204,
+          "BY_adjusted_p": 0.32447393418361564,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t3:1201",
+          "raw_p": 0.000954999045000955,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t3:4155",
+          "raw_p": 0.000350999649000351,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.046207261485046204,
+          "BY_adjusted_p": 0.32447393418361564,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t5:1760",
+          "raw_p": 0.000954999045000955,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t6:3823",
+          "raw_p": 0.000105999894000106,
+          "statistic_integer": 6,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t7:0086",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:3105",
+          "raw_p": 0.000350999649000351,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t9:3067",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2018 Paper 2:48",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:fund:Question 23.23",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:quan:17.9",
+          "raw_p": 0.000236999763000237,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:18cb7836-5712-40a2-806d-ca6f63f1ccc0",
+          "raw_p": 8.999991000009e-05,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.022300886790022303,
+          "BY_adjusted_p": 0.15659998536991257,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2021-15",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        }
+      ]
+    },
+    "global": {
+      "any_effect": [
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "oss",
+          "problem_id": "omni2:t3:3557",
+          "raw_p": 0.000280999719000281,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.04160877320604161,
+          "BY_adjusted_p": 0.3402710592320419,
+          "benchmark": "labbench",
+          "model": "oss",
+          "problem_id": "lab-bench:SeqQA:56585301-34bb-488b-a114-e847dbd95226",
+          "raw_p": 0.000561999438000562,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.04954659331054955,
+          "BY_adjusted_p": 0.4051855050768938,
+          "benchmark": "mascqa",
+          "model": "oss",
+          "problem_id": "mascqa:G-META-22-24",
+          "raw_p": 0.000693999306000694,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t10:3656",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.04160877320604161,
+          "BY_adjusted_p": 0.3402710592320419,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t10:3825",
+          "raw_p": 0.000561999438000562,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t2:2685",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t3:4155",
+          "raw_p": 0.00036999963000037,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.04160877320604161,
+          "BY_adjusted_p": 0.3402710592320419,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t6:3454",
+          "raw_p": 0.000553999446000554,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t6:3632",
+          "raw_p": 0.000392999607000393,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t7:0086",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:0181",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.04160877320604161,
+          "BY_adjusted_p": 0.3402710592320419,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:0304",
+          "raw_p": 0.000478999521000479,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:3105",
+          "raw_p": 0.00036999963000037,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:4047",
+          "raw_p": 0.000305999694000306,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t9:3067",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037435780746037435,
+          "BY_adjusted_p": 0.30614487729676754,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2018 Paper 1:41",
+          "raw_p": 0.000411999588000412,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2018 Paper 2:48",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2019 Paper 1:24",
+          "raw_p": 0.000305999694000306,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2020 Paper 2:27",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:fund:Question 23.23",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:quan:17.9",
+          "raw_p": 0.000305999694000306,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:18cb7836-5712-40a2-806d-ca6f63f1ccc0",
+          "raw_p": 0.000222999777000223,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:a5fb0fba-f514-414c-8fa8-bb298959ca50",
+          "raw_p": 0.000318999681000319,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-META-12-41",
+          "raw_p": 0.000305999694000306,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.04160877320604161,
+          "BY_adjusted_p": 0.3402710592320419,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-META-20-43",
+          "raw_p": 0.000523999476000524,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2013-14",
+          "raw_p": 0.000391999608000392,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2019-16",
+          "raw_p": 0.000292999707000293,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.037409819733037405,
+          "BY_adjusted_p": 0.3059325715566172,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2021-15",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        }
+      ],
+      "correct_harmful": [
+        {
+          "BH_adjusted_p": 0.036191963808036194,
+          "BY_adjusted_p": 0.2857748855847403,
+          "benchmark": "mascqa",
+          "model": "oss",
+          "problem_id": "mascqa:G-XEC-2016-6",
+          "raw_p": 2.3999976000024e-05,
+          "statistic_integer": 9,
+          "trajectory_value_scale": "divide statistic by 10"
+        }
+      ],
+      "off_diagonal": [],
+      "wrong_helpful": [
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t10:3742",
+          "raw_p": 0.000312999687000313,
+          "statistic_integer": 6,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t3:4155",
+          "raw_p": 0.000350999649000351,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t6:3823",
+          "raw_p": 0.000105999894000106,
+          "statistic_integer": 6,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t7:0086",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t8:3105",
+          "raw_p": 0.000350999649000351,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "omni_16k",
+          "model": "gemma",
+          "problem_id": "omni2:t9:3067",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "jeebench",
+          "model": "gemma",
+          "problem_id": "jeebench:JEE Adv 2018 Paper 2:48",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:fund:Question 23.23",
+          "raw_p": 0.00038999961000039,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "scibench",
+          "model": "gemma",
+          "problem_id": "scibench:quan:17.9",
+          "raw_p": 0.000236999763000237,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "labbench",
+          "model": "gemma",
+          "problem_id": "lab-bench:SeqQA:18cb7836-5712-40a2-806d-ca6f63f1ccc0",
+          "raw_p": 8.999991000009e-05,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        },
+        {
+          "BH_adjusted_p": 0.03665996334003666,
+          "BY_adjusted_p": 0.27564220246722776,
+          "benchmark": "mascqa",
+          "model": "gemma",
+          "problem_id": "mascqa:G-XEC-2021-15",
+          "raw_p": 0.000315999684000316,
+          "statistic_integer": 10,
+          "trajectory_value_scale": "divide statistic by 10"
+        }
+      ]
+    },
+    "oss": {
+      "any_effect": [],
+      "correct_harmful": [
+        {
+          "BH_adjusted_p": 0.021023978976021023,
+          "BY_adjusted_p": 0.1545925219591099,
+          "benchmark": "mascqa",
+          "model": "oss",
+          "problem_id": "mascqa:G-XEC-2016-6",
+          "raw_p": 2.3999976000024e-05,
+          "statistic_integer": 9,
+          "trajectory_value_scale": "divide statistic by 10"
+        }
+      ],
+      "off_diagonal": [],
+      "wrong_helpful": []
+    }
+  },
+  "summary": {
+    "gemma": {
+      "any_effect": {
+        "BH_discoveries_q_0_05": 44,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 999,
+        "minimum_raw_p": 0.000222999777000223,
+        "raw_p_le_0_05": 67
+      },
+      "correct_harmful": {
+        "BH_discoveries_q_0_05": 0,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 632,
+        "minimum_raw_p": 0.023224976775023224,
+        "raw_p_le_0_05": 1
+      },
+      "off_diagonal": {
+        "BH_discoveries_q_0_05": 11,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 999,
+        "minimum_raw_p": 8.999991000009e-05,
+        "raw_p_le_0_05": 31
+      },
+      "wrong_helpful": {
+        "BH_discoveries_q_0_05": 13,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 629,
+        "minimum_raw_p": 8.999991000009e-05,
+        "raw_p_le_0_05": 30
+      }
+    },
+    "global": {
+      "any_effect": {
+        "BH_discoveries_q_0_05": 28,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 1999,
+        "minimum_raw_p": 0.000222999777000223,
+        "raw_p_le_0_05": 86
+      },
+      "correct_harmful": {
+        "BH_discoveries_q_0_05": 1,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 1508,
+        "minimum_raw_p": 2.3999976000024e-05,
+        "raw_p_le_0_05": 8
+      },
+      "off_diagonal": {
+        "BH_discoveries_q_0_05": 0,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 1999,
+        "minimum_raw_p": 8.999991000009e-05,
+        "raw_p_le_0_05": 43
+      },
+      "wrong_helpful": {
+        "BH_discoveries_q_0_05": 11,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 1034,
+        "minimum_raw_p": 8.999991000009e-05,
+        "raw_p_le_0_05": 38
+      }
+    },
+    "oss": {
+      "any_effect": {
+        "BH_discoveries_q_0_05": 0,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 1000,
+        "minimum_raw_p": 0.000280999719000281,
+        "raw_p_le_0_05": 19
+      },
+      "correct_harmful": {
+        "BH_discoveries_q_0_05": 1,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 876,
+        "minimum_raw_p": 2.3999976000024e-05,
+        "raw_p_le_0_05": 7
+      },
+      "off_diagonal": {
+        "BH_discoveries_q_0_05": 0,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 1000,
+        "minimum_raw_p": 0.000678999321000679,
+        "raw_p_le_0_05": 12
+      },
+      "wrong_helpful": {
+        "BH_discoveries_q_0_05": 0,
+        "BY_discoveries_q_0_05": 0,
+        "eligible_problems": 405,
+        "minimum_raw_p": 0.000733999266000734,
+        "raw_p_le_0_05": 8
+      }
+    }
+  }
+}

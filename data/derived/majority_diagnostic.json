@@ -1,0 +1,143 @@
+{
+  "analysis_version": "dhd_majority_following_v2",
+  "definitions": {
+    "answer_equivalence": "correct proposals collapse by reference equivalence; wrong proposals use deterministic normalization",
+    "causal_caveat": "answer agreement is observational and does not prove copying",
+    "proposal_majority": "at least three of five proposals are evaluator-labeled correct",
+    "strict_answer_majority": "at least three normalized proposal answer signatures agree"
+  },
+  "rows": [
+    {
+      "benchmark": "omnimath2",
+      "integrator_accuracy": 0.782827074862473,
+      "integrator_only": 382,
+      "majority_only": 69,
+      "model": "gpt_oss_120b",
+      "problem_count": 4181,
+      "proposal_majority_accuracy": 0.7079646017699115,
+      "strict_majority_follow_rate": 0.9198324857912055,
+      "strict_majority_problems": 3343
+    },
+    {
+      "benchmark": "jeebench",
+      "integrator_accuracy": 0.8601941747572815,
+      "integrator_only": 19,
+      "majority_only": 19,
+      "model": "gpt_oss_120b",
+      "problem_count": 515,
+      "proposal_majority_accuracy": 0.8601941747572815,
+      "strict_majority_follow_rate": 0.944558521560575,
+      "strict_majority_problems": 487
+    },
+    {
+      "benchmark": "scibench",
+      "integrator_accuracy": 0.7931034482758621,
+      "integrator_only": 18,
+      "majority_only": 9,
+      "model": "gpt_oss_120b",
+      "problem_count": 580,
+      "proposal_majority_accuracy": 0.7775862068965518,
+      "strict_majority_follow_rate": 0.9698924731182795,
+      "strict_majority_problems": 465
+    },
+    {
+      "benchmark": "labbench",
+      "integrator_accuracy": 0.398110661268556,
+      "integrator_only": 43,
+      "majority_only": 102,
+      "model": "gpt_oss_120b",
+      "problem_count": 741,
+      "proposal_majority_accuracy": 0.4777327935222672,
+      "strict_majority_follow_rate": 0.6130198915009042,
+      "strict_majority_problems": 553
+    },
+    {
+      "benchmark": "mascqa",
+      "integrator_accuracy": 0.9121725731895224,
+      "integrator_only": 14,
+      "majority_only": 7,
+      "model": "gpt_oss_120b",
+      "problem_count": 649,
+      "proposal_majority_accuracy": 0.901386748844376,
+      "strict_majority_follow_rate": 0.9666666666666667,
+      "strict_majority_problems": 630
+    },
+    {
+      "benchmark": "pooled",
+      "integrator_accuracy": 0.7595259525952596,
+      "integrator_only": 476,
+      "majority_only": 206,
+      "model": "gpt_oss_120b",
+      "problem_count": 6666,
+      "proposal_majority_accuracy": 0.719021902190219,
+      "strict_majority_follow_rate": 0.900693683826214,
+      "strict_majority_problems": 5478
+    },
+    {
+      "benchmark": "omnimath2",
+      "integrator_accuracy": 0.7747035573122529,
+      "integrator_only": 1972,
+      "majority_only": 18,
+      "model": "gemma_4_31b",
+      "problem_count": 4048,
+      "proposal_majority_accuracy": 0.29199604743083,
+      "strict_majority_follow_rate": 0.5720823798627003,
+      "strict_majority_problems": 2622
+    },
+    {
+      "benchmark": "jeebench",
+      "integrator_accuracy": 0.890625,
+      "integrator_only": 261,
+      "majority_only": 4,
+      "model": "gemma_4_31b",
+      "problem_count": 512,
+      "proposal_majority_accuracy": 0.388671875,
+      "strict_majority_follow_rate": 0.533816425120773,
+      "strict_majority_problems": 414
+    },
+    {
+      "benchmark": "scibench",
+      "integrator_accuracy": 0.7362068965517241,
+      "integrator_only": 290,
+      "majority_only": 1,
+      "model": "gemma_4_31b",
+      "problem_count": 580,
+      "proposal_majority_accuracy": 0.23793103448275862,
+      "strict_majority_follow_rate": 0.7611940298507462,
+      "strict_majority_problems": 201
+    },
+    {
+      "benchmark": "labbench",
+      "integrator_accuracy": 0.6851574212893553,
+      "integrator_only": 50,
+      "majority_only": 14,
+      "model": "gemma_4_31b",
+      "problem_count": 667,
+      "proposal_majority_accuracy": 0.631184407796102,
+      "strict_majority_follow_rate": 0.8871951219512195,
+      "strict_majority_problems": 656
+    },
+    {
+      "benchmark": "mascqa",
+      "integrator_accuracy": 0.9337442218798151,
+      "integrator_only": 163,
+      "majority_only": 0,
+      "model": "gemma_4_31b",
+      "problem_count": 649,
+      "proposal_majority_accuracy": 0.6825885978428351,
+      "strict_majority_follow_rate": 0.8830188679245283,
+      "strict_majority_problems": 530
+    },
+    {
+      "benchmark": "pooled",
+      "integrator_accuracy": 0.7871747211895911,
+      "integrator_only": 2736,
+      "majority_only": 37,
+      "model": "gemma_4_31b",
+      "problem_count": 6456,
+      "proposal_majority_accuracy": 0.3691140024783148,
+      "strict_majority_follow_rate": 0.6610897580827493,
+      "strict_majority_problems": 4423
+    }
+  ]
+}

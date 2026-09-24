@@ -1,0 +1,4 @@
+evaluator_pair,coverage_pct,disagreement_pct,agreement_pct,cohen_kappa,n_instances
+OSS vs Llama,99.83,5.76,94.24,0.850,16724
+OSS vs Gemma,99.45,4.35,95.65,0.884,16724
+Llama vs Gemma,99.53,3.38,96.62,0.915,16724

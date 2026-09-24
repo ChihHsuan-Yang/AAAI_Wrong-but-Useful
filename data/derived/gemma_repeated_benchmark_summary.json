@@ -1,0 +1,125 @@
+{
+  "benchmarks": {
+    "jeebench": {
+      "counts": {
+        "correct_harmful": 0,
+        "correct_helpful": 5,
+        "indeterminate": 981,
+        "wrong_harmful": 9,
+        "wrong_helpful": 5
+      },
+      "same_input_disagreement": {
+        "count": 10,
+        "denominator": 1000,
+        "percent": 1.0,
+        "wilson_95": [
+          0.5,
+          1.8
+        ]
+      }
+    },
+    "lab_bench": {
+      "counts": {
+        "correct_harmful": 5,
+        "correct_helpful": 14,
+        "indeterminate": 971,
+        "wrong_harmful": 5,
+        "wrong_helpful": 5
+      },
+      "same_input_disagreement": {
+        "count": 19,
+        "denominator": 1000,
+        "percent": 1.9,
+        "wilson_95": [
+          1.2,
+          2.9
+        ]
+      }
+    },
+    "mascqa": {
+      "counts": {
+        "correct_harmful": 5,
+        "correct_helpful": 6,
+        "indeterminate": 975,
+        "wrong_harmful": 9,
+        "wrong_helpful": 5
+      },
+      "same_input_disagreement": {
+        "count": 16,
+        "denominator": 1000,
+        "percent": 1.6,
+        "wilson_95": [
+          1.0,
+          2.6
+        ]
+      }
+    },
+    "omni_math_2": {
+      "counts": {
+        "correct_harmful": 0,
+        "correct_helpful": 2,
+        "indeterminate": 932,
+        "wrong_harmful": 24,
+        "wrong_helpful": 42
+      },
+      "same_input_disagreement": {
+        "count": 16,
+        "denominator": 1000,
+        "percent": 1.6,
+        "wilson_95": [
+          1.0,
+          2.6
+        ]
+      }
+    },
+    "pooled": {
+      "counts": {
+        "correct_harmful": 10,
+        "correct_helpful": 29,
+        "indeterminate": 4831,
+        "wrong_harmful": 57,
+        "wrong_helpful": 73
+      },
+      "same_input_disagreement": {
+        "count": 103,
+        "denominator": 5000,
+        "percent": 2.06,
+        "wilson_95": [
+          1.7,
+          2.49
+        ]
+      }
+    },
+    "scibench": {
+      "counts": {
+        "correct_harmful": 0,
+        "correct_helpful": 2,
+        "indeterminate": 972,
+        "wrong_harmful": 10,
+        "wrong_helpful": 16
+      },
+      "note": "One signal has four rather than five removal blocks because one evaluation is missing.",
+      "same_input_disagreement": {
+        "count": 42,
+        "denominator": 1000,
+        "percent": 4.2,
+        "wilson_95": [
+          3.1,
+          5.6
+        ]
+      }
+    }
+  },
+  "description": "Paper-facing benchmark summary for the controlled Gemma repeated-replay study.",
+  "design": {
+    "expected_events": 35000,
+    "full_calls_per_block": 2,
+    "imputation": "none",
+    "missing_events": 1,
+    "problems_per_benchmark": 200,
+    "removal_calls_per_block": 5,
+    "replicate_blocks_per_problem": 5,
+    "valid_events": 34999
+  },
+  "generated_utc": "2026-07-25"
+}

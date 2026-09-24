@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wrong-but-useful"
+version = "1.0.0"
+description = "Wrong but Useful: trajectory value beyond answer correctness in multi-agent messages."
+requires-python = ">=3.10"
+readme = "README.md"
+license = { file = "LICENSE" }
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+# importmode=importlib avoids sys.path basename clashes between the runtime tests
+# in tests/ and the analysis unit test kept beside its module in analysis/.
+addopts = "-q --import-mode=importlib"
+testpaths = ["tests", "analysis"]
+pythonpath = ["src", "analysis", "analysis/replay", "figures"]
+python_files = ["test_*.py"]

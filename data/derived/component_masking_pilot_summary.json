@@ -1,0 +1,61 @@
+{
+  "cohort_sha256": "2de19a96c675c0c7c13ac361c3e788656696d50fae668cffc7adab9bcdf4a1c8",
+  "description": "Paper-facing summary of the selected component-masking pilot.",
+  "design": {
+    "benchmarks_covered": 5,
+    "cases": 22,
+    "conditions": [
+      "full",
+      "byte_identical_repeat",
+      "removal",
+      "same_position_approximate_length_neutral_replacement",
+      "answer_masked",
+      "reasoning_masked"
+    ],
+    "replicates": 5,
+    "valid_events": 880
+  },
+  "interpretation_guardrail": "Selected pilot only; do not interpret rates as population prevalence or as a complete causal decomposition.",
+  "success_rate": {
+    "correct_harmful_exploratory_n2": {
+      "answer_masked": 1.0,
+      "byte_identical_repeat": 1.0,
+      "full": 1.0,
+      "neutral_replacement": 1.0,
+      "reasoning_masked": 0.7,
+      "removal": 1.0
+    },
+    "correct_helpful_n3": {
+      "answer_masked": 0.87,
+      "byte_identical_repeat": 1.0,
+      "full": 1.0,
+      "neutral_replacement": 0.67,
+      "reasoning_masked": 1.0,
+      "removal": 0.07
+    },
+    "indeterminate_n4": {
+      "answer_masked": 0.55,
+      "byte_identical_repeat": 0.53,
+      "full": 0.5,
+      "neutral_replacement": 0.5,
+      "reasoning_masked": 0.5,
+      "removal": 0.5
+    },
+    "wrong_harmful_n3": {
+      "answer_masked": 0.27,
+      "byte_identical_repeat": 0.0,
+      "full": 0.0,
+      "neutral_replacement": 0.67,
+      "reasoning_masked": 0.47,
+      "removal": 1.0
+    },
+    "wrong_helpful_calibrated_n10": {
+      "answer_masked": 0.64,
+      "byte_identical_repeat": 0.81,
+      "full": 0.82,
+      "neutral_replacement": 0.46,
+      "reasoning_masked": 0.44,
+      "removal": 0.26
+    }
+  }
+}
