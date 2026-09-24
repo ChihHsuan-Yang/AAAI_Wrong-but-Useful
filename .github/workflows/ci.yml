@@ -39,6 +39,19 @@ jobs:
       - name: Validate shipped data against the manifest
         run: python scripts/validate_inputs.py
 
+      # SHA256SUMS drifted once: two commits edited tracked docs without
+      # regenerating it, so a public `shasum -c` failed on a repo that is
+      # otherwise intact. validate_inputs.py only covers the 25 data objects
+      # in ARTIFACT_MANIFEST.json, so it cannot catch that. This does.
+      - name: Verify SHA256SUMS covers every tracked file and still matches
+        run: |
+          shasum -a 256 -c SHA256SUMS
+          missing=$(comm -13 <(cut -d' ' -f3- SHA256SUMS | sed 's/^\*//' | sort) \
+                             <(git ls-files | grep -v '^SHA256SUMS$' | sort))
+          if [ -n "$missing" ]; then
+            echo "Tracked files absent from SHA256SUMS:"; echo "$missing"; exit 1
+          fi
+
       # Pass PYTHON explicitly: the wrappers fall back to `python3`, which
       # resolves against PATH and would not necessarily be this matrix job's
       # interpreter. This also exercises the override the README documents.

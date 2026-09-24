@@ -69,7 +69,7 @@ Five pinned packages, all pure-analysis: matplotlib, numpy, PyYAML, pytest, and
 protocol runtime in `src/dhd/` uses **only the standard library** -- the model
 client is `urllib`, so no HTTP dependency is required to run the protocol.
 
-No GPU. No cluster. Level 1 needs about 2.1 MB of repository data and finishes
+No GPU. No cluster. Level 1 needs about 1.3 MB of repository data and finishes
 in well under a minute.
 
 ### Level 1 -- install, test, reproduce (no model calls)
@@ -472,8 +472,9 @@ transfer to interactive debate, heterogeneous agent models, frontier models, or
 tasks without a stable ground-truth answer.
 
 Repository-specific, measured: the analysis gate's coverage is narrower than the
-shipped data (above); 14 of 38 paper artifacts have no identified generator and
-are marked UNPROVEN; the 16,724-submission cross-evaluator set behind
+shipped data (above); 16 of 38 paper artifacts are marked UNPROVEN in
+`docs/PAPER_REPRODUCTION_MAP.md` -- for most of them no generator was identified,
+and for the rest the link between a shipped file and the table is not established; the 16,724-submission cross-evaluator set behind
 `tab:compound_evaluator` was searched for and **not located**; and the
 component-masking condition naming map is unresolved.
 
