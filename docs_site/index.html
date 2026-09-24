@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wrong but Useful — Trajectory Value Beyond Answer Correctness in Multi-Agent Messages</title>
+<meta name="description" content="DHD measures whether making a multi-agent message available helps or harms downstream reasoning. Wrong answers can still be useful. AAAI paper, code, and data.">
+<link rel="canonical" href="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages">
+<meta property="og:description" content="A wrong answer can still carry a useful decomposition or constraint. DHD measures trajectory value by replaying the same integrator with each message available or hidden.">
+<meta property="og:url" content="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/">
+<meta property="og:image" content="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/assets/fig_DHD_diagram_corrected.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
+<style>
+:root{
+  --bg:#ffffff; --fg:#16191d; --muted:#5a6472; --line:#e3e7ec; --soft:#f6f8fa;
+  --accent:#1f6f5c; --accent-fg:#ffffff; --warn-bg:#fff8e6; --warn-line:#e7c96b;
+  --pill:#eef3f1; --maxw:960px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101316; --fg:#e8ecf1; --muted:#9aa6b4; --line:#262c33; --soft:#171b1f;
+    --accent:#5fc4a6; --accent-fg:#0b1a15; --warn-bg:#2a2412; --warn-line:#6d5c22; --pill:#1b2420;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101316; --fg:#e8ecf1; --muted:#9aa6b4; --line:#262c33; --soft:#171b1f;
+  --accent:#5fc4a6; --accent-fg:#0b1a15; --warn-bg:#2a2412; --warn-line:#6d5c22; --pill:#1b2420;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:20px;padding-right:20px}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+header{border-bottom:1px solid var(--line);padding-block:44px 34px}
+h1{font-size:clamp(1.55rem,4.1vw,2.5rem);line-height:1.22;margin:0 0 6px;letter-spacing:-.02em}
+.sub{color:var(--muted);font-size:1.02rem;margin:0 0 20px}
+.authors{margin:0 0 6px;line-height:2}
+.authors span{white-space:nowrap}
+.aff{color:var(--muted);font-size:.9rem;margin:10px 0 0}
+.aff ol{margin:4px 0 0;padding-left:1.1rem}
+.venue{display:inline-block;background:var(--pill);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.83rem;color:var(--muted);margin-bottom:16px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-fg);padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.95rem}
+.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn .tag{font-weight:500;font-size:.78rem;opacity:.85}
+nav.toc{border-bottom:1px solid var(--line);background:var(--soft);position:sticky;top:0;z-index:5}
+nav.toc ul{display:flex;flex-wrap:wrap;gap:4px 18px;list-style:none;margin:0;padding:11px 20px;max-width:var(--maxw);margin-inline:auto;font-size:.9rem}
+section{padding-block:40px;border-bottom:1px solid var(--line)}
+h2{font-size:1.42rem;margin:0 0 14px;letter-spacing:-.01em}
+h3{font-size:1.06rem;margin:26px 0 8px}
+p{margin:0 0 14px}
+figure{margin:22px 0 8px}
+figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;background:#fff}
+figcaption{color:var(--muted);font-size:.87rem;margin-top:9px}
+.note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:9px;padding:13px 16px;margin:18px 0;font-size:.93rem}
+.note strong{font-weight:700}
+.tablewrap{overflow-x:auto;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:460px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left}
+th{background:var(--soft);font-weight:650}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+code{background:var(--soft);padding:1.5px 5px;border-radius:4px;font-size:.89em}
+pre{background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:14px;overflow-x:auto;font-size:.86rem;line-height:1.5}
+pre code{background:none;padding:0}
+ul.tight{margin:0 0 14px;padding-left:1.15rem}
+ul.tight li{margin-bottom:6px}
+footer{padding-block:32px 46px;color:var(--muted);font-size:.89rem}
+footer a{color:var(--accent)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:12px;top:12px;position:fixed;background:var(--accent);color:var(--accent-fg);padding:10px 16px;border-radius:7px;z-index:99}
+@media (max-width:560px){ .btn{flex:1 1 100%;justify-content:center} nav.toc{position:static} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header>
+  <div class="wrap">
+    <div class="venue">arXiv:2608.14375 &middot; cs.AI &middot; submitted 14 August 2026</div>
+    <h1>Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages</h1>
+    <p class="sub">A message whose own answer is wrong can still carry the decomposition, constraint, or principle another agent needs.</p>
+    <p class="authors">
+      <span>Chih-Hsuan Yang<sup>1,&#42;</sup>,</span> <span>Anjir Ahmed Chowdhury<sup>2</sup>,</span>
+      <span>Cheng-Hau Yang<sup>1</sup>,</span> <span>Weijian Zheng<sup>1</sup>,</span>
+      <span>Fernando Llorente<sup>3</sup>,</span> <span>Xiaolong Ma<sup>1</sup>,</span>
+      <span>Xinyang Li<sup>2</sup>,</span> <span>Eliu A. Huerta<sup>1,4</sup>,</span>
+      <span>Ian T. Foster<sup>4,1</sup>,</span> <span>Rajeev Thakur<sup>1</sup></span>
+    </p>
+    <div class="aff">
+      <ol>
+        <li>Argonne National Laboratory, Lemont, IL, USA</li>
+        <li>University of Houston, Houston, TX, USA</li>
+        <li>Brookhaven National Laboratory, Upton, NY, USA</li>
+        <li>University of Chicago, Chicago, IL, USA</li>
+      </ol>
+      <p style="margin-top:8px"><sup>&#42;</sup>Corresponding author: <a href="mailto:bellayang@anl.gov">bellayang@anl.gov</a></p>
+    </div>
+    <div class="btns">
+      <a class="btn" href="https://arxiv.org/abs/2608.14375">Paper <span class="tag">arXiv</span></a>
+      <a class="btn alt" href="https://arxiv.org/pdf/2608.14375">PDF</a>
+      <a class="btn alt" href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">Code <span class="tag">GitHub</span></a>
+      <a class="btn alt" href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Data <span class="tag">access-controlled</span></a>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Section navigation">
+  <ul>
+    <li><a href="#idea">Core idea</a></li>
+    <li><a href="#protocol">DHD protocol</a></li>
+    <li><a href="#findings">Findings</a></li>
+    <li><a href="#reproduce">Reproduce</a></li>
+    <li><a href="#data">Data &amp; models</a></li>
+    <li><a href="#limits">Limitations</a></li>
+    <li><a href="#cite">Citation</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+<div class="wrap">
+
+<section id="idea">
+  <h2>The core idea</h2>
+  <p>Multi-agent systems routinely decide which messages should shape a final answer using agreement, confidence, or automated scores. That filtering assumes a message likely to be <em>correct</em> is also worth <em>keeping</em>.</p>
+  <p>This paper separates two different judgments about the same message:</p>
+  <ul class="tight">
+    <li><strong>Proposal correctness</strong> &mdash; is the message's own answer right?</li>
+    <li><strong>Trajectory value</strong> &mdash; does making the whole message available help or harm the reasoning that follows?</li>
+  </ul>
+  <p>These come apart in both directions. A wrong answer can supply a useful decomposition or constraint; a correct answer can be paired with misleading reasoning that disrupts integration. The paper's conclusion: <strong>answer correctness is informative, but it does not determine trajectory value.</strong></p>
+</section>
+
+<section id="protocol">
+  <h2>Diverse Hypothesis Deliberation (DHD)</h2>
+  <p>DHD is a controlled measurement protocol. For each problem a recruiter assigns five problem-specific roles without seeing the ground-truth answer. Five hypothesizers each produce one structured message. An integrator then synthesizes a final answer, and a separate evaluator compares that answer to ground truth.</p>
+  <p>The measurement comes from <strong>replay</strong>: the five messages are cached, and the same integrator is run again with each message either available or hidden. Comparing the outcomes isolates one message's contribution &mdash; its trajectory value &mdash; while holding everything else fixed.</p>
+  <figure>
+    <img src="assets/fig_DHD_diagram_corrected.png" alt="Pipeline diagram. A problem and ground truth enter a dynamic recruiter, which assigns five problem-specific roles such as chemist, physicist, scientist and engineer without seeing the reference answer. Each hypothesizer independently produces one structured cached message. An integrator synthesizes selected messages into a final answer across pool sizes k equals 0 through 4. A separate evaluator compares the final answer to ground truth and returns pass or fail.">
+    <figcaption>The DHD protocol. The recruiter never sees the reference answer; the evaluator sees only the submitted answer and an evaluator-only ground truth, never agent reasoning.</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/fig_LOO_diagram_corrected.png" alt="Diagram of two replay mechanisms drawn from the same cached messages. In-pool leave-one-out replay hides one message at a time from the full five-message pool. Single-message replay compares an integrator given one message against an integrator given none.">
+    <figcaption>Two replay mechanisms give complementary views of trajectory value from the same cached messages.</figcaption>
+  </figure>
+  <p>Decoding is fixed per role: recruiter, integrator and evaluator run at temperature 0; hypothesizers run at temperature 0.7 so their solution paths differ. Both model families are scored by the same separate <code>gpt-oss-120b</code> evaluator.</p>
+</section>
+
+<section id="findings">
+  <h2>What the study found</h2>
+  <p>Across five mathematics and science benchmarks and two openly available model families &mdash; <code>gpt-oss-120b</code> (OSS) and <code>gemma-4-31B-it</code> (Gemma) &mdash; <strong>wrong-helpful messages appear in every benchmark&ndash;model combination.</strong></p>
+
+  <h3>Among flips caused by wrong-answer messages, more than four in ten are helpful</h3>
+  <p>Restricted to in-pool leave-one-out replays that actually change final correctness, the helpful share for messages with a wrong proposed answer is <strong>41.9% for OSS</strong> and <strong>45.3% for Gemma</strong>. A problem-cluster bootstrap places the OSS share at 39.5&ndash;44.3%.</p>
+  <div class="note">
+    <strong>Read this per model, not per benchmark.</strong> The &ldquo;more than four in ten&rdquo; result is pooled within each model family. Individual benchmark cells range from about 24% to about 50%. What holds in <em>every</em> benchmark&ndash;model cell is the weaker, still-central claim: wrong-helpful messages are always present.
+  </div>
+  <figure>
+    <img src="assets/fig_cross_benchmark_trajectory_value.png" alt="Grid of helpful and harmful shares across five benchmarks and two model families. Left block, wrong answer with helpful effect: Omni-MATH-2 44.1 percent OSS and 48.6 percent Gemma; JEEBench 39.2 and 49.6; SciBench 37.0 and 38.5; LAB-Bench 35.4 and 29.3; MaScQA 26.9 and 23.6. Right block, correct answer with harmful effect: Omni-MATH-2 33.0 and 24.6; JEEBench 38.8 and 17.9; SciBench 33.6 and 42.3; LAB-Bench 39.7 and 15.1; MaScQA 18.3 and 2.8.">
+    <figcaption>Off-diagonal outcomes across benchmarks and model families. Left: helpful share among flips from wrong-answer messages. Right: harmful share among flips from correct-answer messages &mdash; the converse error is real too, reaching 42.3% in one cell.</figcaption>
+  </figure>
+
+  <h3>The effects survive controlled repetition</h3>
+  <p>Repeated replay shows the number of repeatable message effects is unlikely to arise from replay variation alone (<strong>p&nbsp;=&nbsp;0.0002</strong> against a within-block permutation control).</p>
+  <div class="note">
+    <strong>One asymmetry the paper is explicit about:</strong> after controlling for multiplicity, wrong-helpful cases are recovered for Gemma but <em>not</em> for OSS.
+  </div>
+
+  <h3>The complete message works best &mdash; but why is open</h3>
+  <p>A focused intervention on repeatable wrong-helpful messages found that the complete message works best, and that retaining its reasoning preserves more success than retaining only its answer. The paper states plainly that <strong>the source of the complete-message advantage remains open</strong>.</p>
+
+  <h3>Evaluation is stable across evaluators</h3>
+  <div class="tablewrap">
+    <table>
+      <caption class="skip">Pairwise evaluator agreement over 16,724 saved submissions</caption>
+      <thead><tr><th>Evaluator pair</th><th class="num">Agreement</th><th class="num">Cohen's &kappa;</th><th class="num">Coverage</th></tr></thead>
+      <tbody>
+        <tr><td>OSS vs Llama</td><td class="num">94.24%</td><td class="num">0.850</td><td class="num">99.83%</td></tr>
+        <tr><td>OSS vs Gemma</td><td class="num">95.65%</td><td class="num">0.884</td><td class="num">99.45%</td></tr>
+        <tr><td>Llama vs Gemma</td><td class="num">96.62%</td><td class="num">0.915</td><td class="num">99.53%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>16,724 saved submissions replayed with three open evaluators. <code>Meta-Llama-3.1-70B-Instruct</code> and <code>gemma-3-27b-it</code> appear here <strong>only as evaluators</strong> in this agreement check &mdash; they are not actor model families in the study.</p>
+
+  <h3>Benchmarks</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Benchmark</th><th>Domain and format</th><th class="num">Problems</th></tr></thead>
+      <tbody>
+        <tr><td>Omni-MATH-2</td><td>Open-answer competition mathematics</td><td class="num">4,181</td></tr>
+        <tr><td>JEEBench</td><td>Mixed-choice and numeric exam science</td><td class="num">515</td></tr>
+        <tr><td>SciBench</td><td>Numeric and short-answer college science</td><td class="num">580</td></tr>
+        <tr><td>LAB-Bench</td><td>Long-evidence multiple-choice biology</td><td class="num">741</td></tr>
+        <tr><td>MaScQA</td><td>Mixed-format materials science</td><td class="num">649</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="reproduce">
+  <h2>Reproduce the study</h2>
+  <p>There is an important distinction between <em>offline analysis reproduction</em> and <em>live model regeneration</em>, and they are not equally available.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Level</th><th>What it does</th><th>What you need</th><th>Open to a newcomer?</th></tr></thead>
+      <tbody>
+        <tr><td>1. Offline</td><td>Install, unit tests, checksum validation, regenerate figures and summary tables from data bundled in the repository</td><td>Python &ge; 3.11</td><td><strong>Yes, fully.</strong> This is the reproduction path.</td></tr>
+        <tr><td>2. Live protocol</td><td>Run DHD on the bundled fixture against an endpoint you control</td><td>Level 1 plus your own OpenAI-compatible endpoint</td><td>Yes, if you bring an endpoint</td></tr>
+        <tr><td>3. Component masking</td><td>Matched masking arms on pools you generate</td><td>Level 2 plus cached pools</td><td>Mechanism yes; see repository caveats</td></tr>
+        <tr><td>4. Full regeneration</td><td>The complete five-benchmark, two-family campaign</td><td>Benchmark licenses and HPC-scale inference</td><td>Not realistically</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Offline reproduction, from a clean machine</h3>
+<pre><code>git clone https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful.git
+cd AAAI_Wrong-but-Useful
+python3 -m venv .venv &amp;&amp; source .venv/bin/activate   # Python &gt;= 3.11
+python -m pip install -r requirements.lock
+python -m pytest                    # unit tests
+python scripts/validate_inputs.py   # checksum-validate bundled data
+bash scripts/reproduce_analysis.sh  # regenerate figures and summary tables</code></pre>
+  <p>No API key, endpoint, cluster account, or author filesystem is needed for this path. To run new model calls you supply your own endpoint through environment variables; a dry run prints the resolved per-role model identities before any request is made.</p>
+  <div class="note">
+    <strong>What the offline check does and does not verify.</strong> The analysis gate recomputes the in-pool leave-one-out tables and a fixed set of summary fields. Rows and columns outside that scope are shipped and checksum-validated, but are not re-derived by the analysis step. The repository documents this explicitly rather than implying the gate validates everything.
+  </div>
+  <p>Full details, expected outputs, troubleshooting and a per-artifact reproduction map are in the <a href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">repository README</a>, <code>docs/PAPER_REPRODUCTION_MAP.md</code> and <code>docs/MODEL_DEPENDENCIES.md</code>. The paper's arXiv entry also carries an ancillary reproducibility artifact.</p>
+</section>
+
+<section id="data">
+  <h2>Data and models</h2>
+  <h3>No model is released, and none is needed</h3>
+  <div class="note">
+    <strong>This work does not release a paper-specific trained model.</strong> Nothing was fine-tuned for this paper. Experiments use openly available upstream model families through inference endpoints, so <strong>no model download is required or provided</strong>. The hosted endpoints did not expose weight-revision hashes, so the paper reports model identifiers, prompt configurations, decoding settings and per-run provenance instead of a checkpoint hash.
+  </div>
+  <h3>Dataset access</h3>
+  <p>The full measurement archive is published at <a href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">AgentsSci/AAAI_Wrong-but-Useful</a>. It is <strong>access-controlled, not a public download</strong>, because it contains third-party benchmark question text and raw model messages whose redistribution terms are governed by the upstream benchmark licenses &mdash; including CC BY-NC-SA 4.0 for MaScQA and CC BY-SA 4.0 for LAB-Bench.</p>
+  <p>Offline reproduction does not depend on it: the derived data and figure inputs needed for the Level 1 path are bundled in the code repository itself.</p>
+</section>
+
+<section id="limits">
+  <h2>Limitations</h2>
+  <p>Quoted from the paper, because they qualify every result above.</p>
+  <ul class="tight">
+    <li>Trajectory-value labels describe a message&ndash;pool&ndash;integrator context, not an intrinsic property of text; individual signs can change even with fixed problems and messages.</li>
+    <li>Repetition reduces but does not eliminate uncertainty, and the fifth-block analysis measures same-problem opportunity rather than unseen-problem generalization.</li>
+    <li>Leave-one-out hides a whole message in one fixed prompt order; the smaller masking diagnostic only begins to separate reasoning from the answer field.</li>
+    <li>Nested <em>K</em> prefixes are not randomized agent additions, and one model family fills all reasoning roles within each run.</li>
+    <li>Results may not transfer to interactive debate, heterogeneous agent models, frontier models, or tasks without a stable ground-truth answer.</li>
+    <li>Gemma rates condition on complete replay records, and compound labels are more evaluator-sensitive than individual answers.</li>
+  </ul>
+</section>
+
+<section id="cite">
+  <h2>Citation</h2>
+<pre><code>@misc{yang2026wrongbutuseful,
+  title         = {Wrong but Useful: Trajectory Value Beyond Answer
+                   Correctness in Multi-Agent Messages},
+  author        = {Yang, Chih-Hsuan and Chowdhury, Anjir Ahmed and
+                   Yang, Cheng-Hau and Zheng, Weijian and
+                   Llorente, Fernando and Ma, Xiaolong and Li, Xinyang and
+                   Huerta, Eliu A. and Foster, Ian T. and Thakur, Rajeev},
+  year          = {2026},
+  eprint        = {2608.14375},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2608.14375}
+}</code></pre>
+  <h3>Acknowledgments</h3>
+  <p>This research used resources of the Argonne Leadership Computing Facility, a U.S. Department of Energy (DOE) Office of Science user facility at Argonne National Laboratory (ANL) operated under Contract No.&nbsp;DE-AC02-06CH11357. The work was also supported under the same contract by the DOE Office of Science's Advanced Scientific Computing Research Program and by Laboratory Directed Research and Development (LDRD) funding from ANL, provided by the Director, DOE Office of Science.</p>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <a href="https://arxiv.org/abs/2608.14375">Paper (arXiv:2608.14375)</a> &middot;
+      <a href="https://arxiv.org/pdf/2608.14375">PDF</a> &middot;
+      <a href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">Code</a> &middot;
+      <a href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Dataset (access-controlled)</a>
+    </p>
+    <p>Figures are reproduced from the paper. Code is released under the MIT License; see the repository for third-party notices. This site is an original page written for this project; it uses no external template, tracker, or analytics.</p>
+  </div>
+</footer>
+</body>
+</html>
