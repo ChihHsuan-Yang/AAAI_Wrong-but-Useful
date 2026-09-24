@@ -10,7 +10,7 @@ trajectory-value taxonomy in which **wrong proposals can be helpful** and
 |---|---|
 | Paper | https://arxiv.org/abs/2608.14375 ([PDF](https://arxiv.org/pdf/2608.14375)) |
 | Code | https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful |
-| Project site | https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/ **(PENDING -- not yet deployed)** |
+| Project site | https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/ **(live)** |
 | Data | https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful **(ACCESS-CONTROLLED -- see [Data](#data))** |
 | License | MIT (see [`LICENSE`](LICENSE), [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)) |
 
