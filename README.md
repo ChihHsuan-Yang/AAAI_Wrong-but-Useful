@@ -11,7 +11,7 @@ trajectory-value taxonomy in which **wrong proposals can be helpful** and
 | Paper | https://arxiv.org/abs/2608.14375 ([PDF](https://arxiv.org/pdf/2608.14375)) |
 | Code | https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful |
 | Project site | https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/ **(live)** |
-| Data | https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful **(ACCESS-CONTROLLED -- see [Data](#data))** |
+| Data | https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful **(public; NON-COMMERCIAL, and do-not-train on the LAB-Bench subset -- see [Data](#data))** |
 | License | MIT (see [`LICENSE`](LICENSE), [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)) |
 
 > **This work does not release a paper-specific trained model. Experiments use
@@ -40,7 +40,8 @@ There are four levels, and they are not equally available to you.
 | **4. Full regeneration** | the paper's full five-benchmark, two-family campaign | benchmark licenses, HPC-scale inference, weeks | **No**, realistically. |
 
 **Level 1 is the reproduction path, and it uses the data in this repository.**
-Do not start with `hf download`: the dataset is access-controlled (below).
+You do not need `hf download` for Level 1: the derived data it uses is bundled
+here. The full dataset is public, but it carries usage restrictions (below).
 
 ### Requirements
 
@@ -368,9 +369,21 @@ files are gitignored.
 
 The Hugging Face dataset
 [`AgentsSci/AAAI_Wrong-but-Useful`](https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful)
-is **access-controlled**. A newcomer cannot simply download it, so the public
-reproduction path is the derived data and figure source CSVs bundled in this
-repository. That is what Level 1 uses, and it is sufficient for it.
+is **public**, but it redistributes third-party benchmark content and therefore
+carries usage restrictions that this repository does not:
+
+- **The dataset as a whole is NON-COMMERCIAL.** It includes MaScQA content under
+  CC-BY-NC-SA-4.0 (`commercial_use = not_allowed`). Exclude
+  `benchmark_id = mascqa` for a commercially usable subset.
+- **Do not train on the LAB-Bench subset.** LAB-Bench (CC-BY-SA-4.0) carries an
+  upstream do-not-train request. Note that the enforcing canary string is
+  **absent** from those files (measured, 0 of 1,542 rows), so an automated
+  contamination filter will not catch it for you -- filter
+  `benchmark_id = labbench` explicitly.
+
+Read the dataset card before downloading. You do **not** need the dataset for
+Level 1: the derived data and figure source CSVs bundled in this repository are
+what Level 1 uses, and they are sufficient for it.
 
 This repository ships **no benchmark question text**, by design. Derived records
 carry integer counts, rates, intervals, public benchmark and model labels, and

@@ -103,7 +103,7 @@ footer a{color:var(--accent)}
       <a class="btn" href="https://arxiv.org/abs/2608.14375">Paper <span class="tag">arXiv</span></a>
       <a class="btn alt" href="https://arxiv.org/pdf/2608.14375">PDF</a>
       <a class="btn alt" href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">Code <span class="tag">GitHub</span></a>
-      <a class="btn alt" href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Data <span class="tag">access-controlled</span></a>
+      <a class="btn alt" href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Data <span class="tag">non-commercial</span></a>
     </div>
   </div>
 </header>
@@ -238,7 +238,12 @@ bash scripts/reproduce_analysis.sh  # regenerate figures and summary tables</cod
     <strong>This work does not release a paper-specific trained model.</strong> Nothing was fine-tuned for this paper. Experiments use openly available upstream model families through inference endpoints, so <strong>no model download is required or provided</strong>. The hosted endpoints did not expose weight-revision hashes, so the paper reports model identifiers, prompt configurations, decoding settings and per-run provenance instead of a checkpoint hash.
   </div>
   <h3>Dataset access</h3>
-  <p>The full measurement archive is published at <a href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">AgentsSci/AAAI_Wrong-but-Useful</a>. It is <strong>access-controlled, not a public download</strong>, because it contains third-party benchmark question text and raw model messages whose redistribution terms are governed by the upstream benchmark licenses &mdash; including CC BY-NC-SA 4.0 for MaScQA and CC BY-SA 4.0 for LAB-Bench.</p>
+  <p>The full measurement archive is public at <a href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">AgentsSci/AAAI_Wrong-but-Useful</a>. It contains third-party benchmark question text and raw model messages, so it carries the upstream benchmarks' own terms and <strong>is not unrestricted</strong>:</p>
+  <ul class="tight">
+    <li><strong>Non-commercial as a whole.</strong> MaScQA content is CC BY-NC-SA 4.0, so the dataset as a whole cannot be used commercially. Excluding <code>benchmark_id = mascqa</code> gives a commercially usable subset.</li>
+    <li><strong>Do not train on the LAB-Bench subset.</strong> LAB-Bench is CC BY-SA 4.0 and carries an upstream do-not-train request. The canary string that would normally enforce this automatically is <strong>absent</strong> from the released files (measured: 0 of 1,542 rows), so a contamination filter will not catch it &mdash; exclude <code>benchmark_id = labbench</code> explicitly.</li>
+  </ul>
+  <p>Read the dataset card before downloading. Offline reproduction does not require the dataset: the derived data and figure inputs for that path are bundled in the code repository.</p>
   <p>Offline reproduction does not depend on it: the derived data and figure inputs needed for the Level 1 path are bundled in the code repository itself.</p>
 </section>
 
@@ -283,7 +288,7 @@ bash scripts/reproduce_analysis.sh  # regenerate figures and summary tables</cod
       <a href="https://arxiv.org/abs/2608.14375">Paper (arXiv:2608.14375)</a> &middot;
       <a href="https://arxiv.org/pdf/2608.14375">PDF</a> &middot;
       <a href="https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful">Code</a> &middot;
-      <a href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Dataset (access-controlled)</a>
+      <a href="https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful">Dataset (non-commercial)</a>
     </p>
     <p>Figures are reproduced from the paper. Code is released under the MIT License; see the repository for third-party notices. This site is an original page written for this project; it uses no external template, tracker, or analytics.</p>
   </div>
