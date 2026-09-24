@@ -104,7 +104,8 @@ python scripts/validate_inputs.py
 bash scripts/reproduce_analysis.sh            # writes ./reproduced
 # or: bash scripts/reproduce_analysis.sh /tmp/out
 ```
-> Expected: 12 figure files (PDF + PNG for six figures) and **both** of these
+> Expected: 20 files in the output directory -- PDF, PNG and SVG for each of six
+> figures, plus two JSON summaries -- and **both** of these
 > lines:
 > ```
 > PASS: recomputed headline summary matches expected manifest.

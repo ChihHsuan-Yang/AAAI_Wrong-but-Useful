@@ -109,3 +109,11 @@ The `OFFLINE-DETERMINISTIC` rows are the ones CI runs on every push. Note the
 coverage limit described in `README.md`: the analysis gate checks the
 `In-pool LOO` rows and seven columns, not every row and column of the data it
 ships.
+
+## Note on MaScQA: 650 raw rows vs N = 649
+
+`figures/benchmark_properties_source.csv` lists **650** rows for MaScQA, while the paper's
+`tab:datasets` and every analysis in this repository use **649**. Both are correct and they are
+different quantities. The paper states it directly: *"MaScQA contains 650 raw rows; one row is an
+exact duplicate, so all analyses collapse it to 649 unique problems."* Use 649 as the analysis N.
+
