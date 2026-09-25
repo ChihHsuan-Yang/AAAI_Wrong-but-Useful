@@ -12,6 +12,241 @@
 <meta property="og:url" content="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/">
 <meta property="og:image" content="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/assets/fig_DHD_diagram_corrected.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Chih-Hsuan Yang, Anjir Ahmed Chowdhury, Cheng-Hau Yang, Weijian Zheng, Fernando Llorente, Xiaolong Ma, Xinyang Li, Eliu A. Huerta, Ian T. Foster, Rajeev Thakur">
+<meta name="keywords" content="Wrong but Useful,trajectory value,DHD,multi-agent messages,multi-agent systems,LLM agents,counterfactual replay,Chih-Hsuan Yang,Bella Yang,Argonne National Laboratory,AAAI">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta property="og:site_name" content="Wrong but Useful">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Diagram of the DHD protocol: the same integrator is replayed with each multi-agent message available or hidden.">
+<meta name="twitter:title" content="Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages">
+<meta name="twitter:description" content="A wrong answer can still carry a useful decomposition or constraint. DHD measures trajectory value by replaying the same integrator with each message available or hidden.">
+<meta name="twitter:image" content="https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/assets/fig_DHD_diagram_corrected.png">
+<meta name="twitter:image:alt" content="Diagram of the DHD protocol for measuring trajectory value in multi-agent messages.">
+<meta name="citation_title" content="Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages">
+<meta name="citation_author" content="Yang, Chih-Hsuan">
+<meta name="citation_author" content="Chowdhury, Anjir Ahmed">
+<meta name="citation_author" content="Yang, Cheng-Hau">
+<meta name="citation_author" content="Zheng, Weijian">
+<meta name="citation_author" content="Llorente, Fernando">
+<meta name="citation_author" content="Ma, Xiaolong">
+<meta name="citation_author" content="Li, Xinyang">
+<meta name="citation_author" content="Huerta, Eliu A.">
+<meta name="citation_author" content="Foster, Ian T.">
+<meta name="citation_author" content="Thakur, Rajeev">
+<meta name="citation_publication_date" content="2026/08/14">
+<meta name="citation_arxiv_id" content="2608.14375">
+<meta name="citation_doi" content="10.48550/arXiv.2608.14375">
+<meta name="citation_pdf_url" content="https://arxiv.org/pdf/2608.14375">
+<meta name="citation_abstract_html_url" content="https://arxiv.org/abs/2608.14375">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "ScholarlyArticle",
+   "@id": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/#article",
+   "headline": "Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages",
+   "name": "Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages",
+   "description": "DHD measures whether making a multi-agent message available helps or harms downstream reasoning by replaying the same integrator with each message available or hidden. A message whose own answer is wrong can still carry the decomposition or constraint another agent needs. Paper, code, and dataset by Chih-Hsuan (Bella) Yang and colleagues at Argonne National Laboratory.",
+   "url": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/",
+   "image": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/assets/fig_DHD_diagram_corrected.png",
+   "inLanguage": "en",
+   "datePublished": "2026-08-14",
+   "author": [
+    {
+     "@type": "Person",
+     "name": "Chih-Hsuan Yang",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "Argonne National Laboratory"
+     },
+     "alternateName": "Bella Yang",
+     "url": "https://chihhsuan-yang.github.io/",
+     "sameAs": [
+      "https://chihhsuan-yang.github.io/",
+      "https://github.com/ChihHsuan-Yang"
+     ]
+    },
+    {
+     "@type": "Person",
+     "name": "Anjir Ahmed Chowdhury",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "University of Houston"
+     }
+    },
+    {
+     "@type": "Person",
+     "name": "Cheng-Hau Yang",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "Argonne National Laboratory"
+     }
+    },
+    {
+     "@type": "Person",
+     "name": "Weijian Zheng",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "Argonne National Laboratory"
+     }
+    },
+    {
+     "@type": "Person",
+     "name": "Fernando Llorente",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "Brookhaven National Laboratory"
+     }
+    },
+    {
+     "@type": "Person",
+     "name": "Xiaolong Ma",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "Argonne National Laboratory"
+     }
+    },
+    {
+     "@type": "Person",
+     "name": "Xinyang Li",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "University of Houston"
+     }
+    },
+    {
+     "@type": "Person",
+     "name": "Eliu A. Huerta",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "Argonne National Laboratory"
+     }
+    },
+    {
+     "@type": "Person",
+     "name": "Ian T. Foster",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "University of Chicago"
+     }
+    },
+    {
+     "@type": "Person",
+     "name": "Rajeev Thakur",
+     "affiliation": {
+      "@type": "Organization",
+      "name": "Argonne National Laboratory"
+     }
+    }
+   ],
+   "publisher": {
+    "@type": "Organization",
+    "name": "Argonne National Laboratory",
+    "url": "https://www.anl.gov/"
+   },
+   "identifier": [
+    {
+     "@type": "PropertyValue",
+     "propertyID": "arXiv",
+     "value": "arXiv:2608.14375"
+    },
+    {
+     "@type": "PropertyValue",
+     "propertyID": "DOI",
+     "value": "10.48550/arXiv.2608.14375"
+    }
+   ],
+   "sameAs": [
+    "https://arxiv.org/abs/2608.14375",
+    "https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful",
+    "https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful"
+   ],
+   "keywords": [
+    "trajectory value",
+    "DHD",
+    "multi-agent systems",
+    "LLM agents",
+    "counterfactual replay",
+    "AI for Science"
+   ],
+   "isPartOf": {
+    "@id": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/#webpage"
+   },
+   "citation": {
+    "@type": "CreativeWork",
+    "name": "arXiv:2608.14375",
+    "url": "https://arxiv.org/abs/2608.14375"
+   }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/#webpage",
+   "url": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/",
+   "name": "Wrong but Useful: Trajectory Value Beyond Answer Correctness in Multi-Agent Messages",
+   "description": "DHD measures whether making a multi-agent message available helps or harms downstream reasoning by replaying the same integrator with each message available or hidden. A message whose own answer is wrong can still carry the decomposition or constraint another agent needs. Paper, code, and dataset by Chih-Hsuan (Bella) Yang and colleagues at Argonne National Laboratory.",
+   "inLanguage": "en",
+   "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/assets/fig_DHD_diagram_corrected.png"
+   },
+   "isPartOf": {
+    "@type": "WebSite",
+    "@id": "https://chihhsuan-yang.github.io/#website",
+    "url": "https://chihhsuan-yang.github.io/",
+    "name": "Chih-Hsuan (Bella) Yang",
+    "alternateName": "Bella Yang"
+   },
+   "about": {
+    "@id": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/#article"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Chih-Hsuan (Bella) Yang",
+    "alternateName": "Bella Yang",
+    "url": "https://chihhsuan-yang.github.io/"
+   },
+   "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+     {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Chih-Hsuan (Bella) Yang",
+      "item": "https://chihhsuan-yang.github.io/"
+     },
+     {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Wrong but Useful",
+      "item": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/"
+     }
+    ]
+   }
+  },
+  {
+   "@type": "Dataset",
+   "@id": "https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/#dataset",
+   "name": "Wrong but Useful: multi-agent trajectory value dataset",
+   "description": "Multi-agent trajectories and DHD trajectory-value labels released with the Wrong but Useful paper.",
+   "url": "https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful",
+   "creator": {
+    "@type": "Person",
+    "name": "Chih-Hsuan (Bella) Yang",
+    "alternateName": "Bella Yang"
+   },
+   "isAccessibleForFree": true,
+   "license": "https://creativecommons.org/licenses/by/4.0/",
+   "distribution": {
+    "@type": "DataDownload",
+    "contentUrl": "https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful",
+    "encodingFormat": "application/json"
+   }
+  }
+ ]
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#129513;</text></svg>">
 <style>
 :root{

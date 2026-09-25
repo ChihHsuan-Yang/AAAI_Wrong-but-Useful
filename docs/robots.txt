@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/sitemap.xml
