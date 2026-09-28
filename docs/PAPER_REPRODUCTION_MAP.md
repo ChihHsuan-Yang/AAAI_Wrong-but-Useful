@@ -22,15 +22,38 @@ said are stated inline or need the raw release root.
 
 Three findings worth reading before you use this table:
 
-* **`tab:compound_evaluator` and `fig:verifier_agreement` rest on a
-  16,724-submission cross-evaluator set that two independent searches failed to
-  locate.** Both are marked `UNPROVEN` for that reason, not because a script is
-  missing.
-* **`tab:component_masking`'s condition naming is unresolved.** Both halves of
-  the generator are ported and runnable, but the paper describes six conditions
-  and 880 outcomes where this code implements five and consumes four effects
-  (550). The obvious mapping is plausible and unrecorded. Do not report this
-  table as reproduced.
+* **CORRECTED 2026-09-27: these are two different objects, and only one is missing.**
+  An earlier revision of this file said both `tab:compound_evaluator` and
+  `fig:verifier_agreement` rest on a 16,724-submission set that was never located.
+  That conflated them.
+  `tab:compound_evaluator` rests on a **150-triplet balanced audit**, which HAS
+  been located and verified: it carries three distinct evaluator judgment files
+  (gemma-3-27b-it, Llama-3.1-70B-Instruct, gpt-oss-120b) and its
+  `analysis_complete_case/summary.json` reports
+  `complete_triplets_all_evaluators: 140` with
+  `all_evaluator_exact_compound_agreement: 0.6714285714285714` -> the paper's
+  OSS row of N=140, three-way 67.1. Exact match; Gemma likewise at N=148 -> 77.7.
+  `fig:verifier_agreement` is the one that depends on the separate
+  **16,724-submission** replay, and that set remains **NOT LOCATED** on any
+  reachable filesystem. It cannot be reconstructed from the 150-triplet audit,
+  which is a different object at a different scale.
+  Note 16,724 = 4,181 x 4 is reachable coincidentally in more than one way, so a
+  matching row count is not evidence of provenance; the discriminating test is
+  whether three distinct evaluator ids are present.
+* **RESOLVED 2026-09-27: `tab:component_masking`'s condition naming.** The
+  earlier caveat here said the mapping was "plausible and unrecorded" and told
+  readers not to report the table as reproduced. It is now recorded. The source
+  run on Crux (`.../dhd_results/replay_stability/gemma/_priorityD_pilot_20260725/`)
+  declares six conditions in its own `design` block --
+  `full`, `removal`, `semantic_mask`, `answer_masked`, `reasoning_masked`,
+  `null_dup` -- with `valid_events: 880`. Cross-matching its `pilot_summary.json`
+  against the summary shipped here gives **18/18 exact rate matches across three
+  cohorts**, which fixes the two ambiguous names:
+  `semantic_mask` = neutral replacement, `null_dup` = byte-identical repeat.
+  The apparent "five conditions / 550" in this repository's code is because it
+  reports five *deltas against `full`*, and `full` and `null_dup` each run two
+  arms -- 22 cases x 5 repetitions x 8 condition/arm cells = 880. The paper's
+  arithmetic was correct throughout; only the name map was missing.
 * **`fig:main_trace_examples` cannot be regenerated at all** from anything here:
   it quotes verbatim agent message text, which is not published, and the
   shortlisting script's outputs embed benchmark question text this repository
@@ -79,7 +102,7 @@ Three findings worth reading before you use this table:
 | Kind | Label | What it shows | Generator | How to run | Notes |
 |---|---|---|---|---|---|
 | figure | `fig:protocol` | DHD protocol prompt/role description | - | - | A LaTeX float with no includegraphics and a caption near-identical to fig:dhd-protocol. Possibly a stale duplicate label; UNPROVEN whether a graphic was intended. |
-| figure | `fig:verifier_agreement` | Pairwise agreement among three LLM evaluators (N=16724) | `figures/make_evaluator_agreement.py` | `bash scripts/reproduce_analysis.sh` | The 3-row source CSV regenerates a figure, but NAME MISMATCH: the manifest calls it fig_evaluator_agreement, the paper includes fig_verifier_agreement.pdf. Almost certainly the same figure renamed, but not confirmed. Separately, the N=16,724 cross-evaluator submission set behind it was searched for and NOT LOCATED by two independent passes. |
+| figure | `fig:verifier_agreement` | Pairwise agreement among three LLM evaluators (N=16724) | `figures/make_evaluator_agreement.py` | `bash scripts/reproduce_analysis.sh` | The 3-row source CSV regenerates a figure, but NAME MISMATCH: the manifest calls it fig_evaluator_agreement, the paper includes fig_verifier_agreement.pdf. Almost certainly the same figure renamed, but not confirmed. Separately, the N=16,724 cross-evaluator submission set behind it was searched for and NOT LOCATED by three independent passes, most recently a targeted sweep of Crux/Polaris on 2026-09-27. This is distinct from `tab:compound_evaluator`'s 150-triplet audit, which WAS located -- see the corrected note above. |
 | table | `tab:measurement_summary` | Final accuracy for K=0 independent and K=5 integration | - | - | No generator identified; not in the manifest's tables list. Stated inline in the paper. |
 | table | `tab:datasets` | Five-benchmark suite with N unique problems | `figures/benchmark_properties_source.csv` | - | The 5-row CSV is shipped and checksum-validated and is a plausible source, but no manifest entry maps it to this table. Linkage UNPROVEN. |
 | table | `tab:loo_otherbench` | Signed LOO outcomes at K=5 across benchmarks (OSS) | - | - | No generator identified; not in the manifest's tables list. |
@@ -90,7 +113,7 @@ Three findings worth reading before you use this table:
 | table | `tab:app_loo_by_dataset` | Dataset drill-down for LOO replay pooled over K=2-5 | - | - | No generator identified. |
 | table | `tab:repeated_cross_model_calibration` | Cross-model calibration of repeated K=5 effects | `data/derived/gemma_repeated_benchmark_summary.json` | - | The JSON is shipped and manifest-listed but no table entry maps it here. Linkage UNPROVEN. |
 | table | `tab:original_repeated_alignment` | Alignment between original W+ observations and controlled repeated replay | - | - | No generator identified. |
-| table | `tab:compound_evaluator` | Cross-evaluator agreement on balanced triplets | - | - | No generator identified, and the underlying 16,724-submission cross-evaluator set was independently NOT LOCATED by two search passes. Not reproducible from anything known to exist locally. |
+| table | `tab:compound_evaluator` | Cross-evaluator agreement on balanced triplets | `dhd_compound_evaluator_audit.py` (on HPC, with its PBS job and unit test) | see note | **REQUIRES-PRIVATE-DATA (corrected 2026-09-27; was UNPROVEN).** Source located and verified on the authors' ALCF eagle filesystem under `dhd_results/evaluator_audit/compound_v1/{oss,gemma}/` (non-portable internal location, recorded in the authors' private provenance index; not reachable by a reader). Three distinct evaluator judgment files per arm; `analysis_complete_case/summary.json` reproduces the printed row exactly (OSS `complete_triplets_all_evaluators`=140, `all_evaluator_exact_compound_agreement`=0.6714285714285714 -> 67.1; Gemma 148 -> 77.7). Not reproducible from this repository alone because the judgment files are not published. |
 | table | `tab:app_protocol_matrix` | System-level final accuracy for four protocols x five benchmarks x two families | - | - | No generator identified. 40 protocol cells across four protocols x five benchmarks x two families. |
 | table | `tab:app_protocol_cost` | Accuracy and inference effort on the 4181-problem Omni-MATH-2 OSS run | - | - | No generator identified. |
 | table | `tab:cross_fitted_placebos` | Sensitivity of cross-fitted gain to replicate and shuffled controls | - | - | value_aware_one_removal_per_fold.csv is a plausible source, but the placebo and shuffle arms are not in expected_signal_tables.json and the table is not in the manifest's tables list. Linkage UNPROVEN. |
