@@ -568,6 +568,248 @@ Corresponding author: Chih-Hsuan Yang, Argonne National Laboratory --
 bellayang@anl.gov. For reproduction problems, please open an issue and include
 the output of `python scripts/dry_run.py` (it contains no credentials).
 
+## Project resources and navigation
+
+**This is the navigation hub for the whole project.** Public artifacts are linked; private and
+HPC-only artifacts are named with their exact paths and the reason they are not published.
+
+> **Scope note for anyone who is not the author.** This repository is the public artifact. The
+> review-preparation workspace described below is **private** and not distributed: it contains
+> mock-review material and reviewer-response drafts, which should not be public while the paper is
+> under review at AAAI-27. Paths into it are recorded here so the project is resumable, not because
+> the contents are downloadable.
+
+### Public resources
+
+| Resource | Link | Contents |
+|---|---|---|
+| **Code (this repo)** | [`ChihHsuan-Yang/AAAI_Wrong-but-Useful`](https://github.com/ChihHsuan-Yang/AAAI_Wrong-but-Useful) · branch **`main`** | DHD implementation, analysis pipeline, bundled derived data, tests |
+| **Paper** | [arXiv:2608.14375](https://arxiv.org/abs/2608.14375) · [PDF](https://arxiv.org/pdf/2608.14375) | Public version of the submitted manuscript |
+| **Project page** | [chihhsuan-yang.github.io/AAAI_Wrong-but-Useful](https://chihhsuan-yang.github.io/AAAI_Wrong-but-Useful/) | Findings, protocol, reproduction summary |
+| **Dataset** | [🤗 `AgentsSci/AAAI_Wrong-but-Useful`](https://huggingface.co/datasets/AgentsSci/AAAI_Wrong-but-Useful) | Trajectory-value measurements, hypotheses, interventions, replay labels, registry. ⚠️ **non-commercial; no training on LAB-Bench** |
+| **Model** | none released — see [`docs/MODEL_DEPENDENCIES.md`](docs/MODEL_DEPENDENCIES.md) | No checkpoint is published by this work |
+
+**Which dataset version this paper uses.** The analyses here read the **bundled derived data in
+this repository**, not a live download, so results do not move when an upstream card changes. The
+Hugging Face dataset is the same derived data republished for convenience. Integrity is pinned by
+[`SHA256SUMS`](SHA256SUMS) (CI-enforced) and [`ARTIFACT_MANIFEST.json`](ARTIFACT_MANIFEST.json);
+verify with `sha256sum -c SHA256SUMS`. Upstream benchmarks and model cards are listed with their
+own licenses in [`DATA.md`](DATA.md) and [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+**Inference-time model identity cannot be pinned by hash:** the endpoints used for the paper do not
+expose weight-revision hashes — see the caveat in [`ENVIRONMENT.md`](ENVIRONMENT.md).
+
+**Where the code lives in this repository**
+
+| What | Path |
+|---|---|
+| DHD implementation | [`src/dhd/`](src/dhd/) |
+| Analysis pipeline | [`analysis/`](analysis/) — incl. [`analysis/replay/`](analysis/replay/), [`analysis/robustness/`](analysis/robustness/) |
+| One-command reproduction | [`scripts/reproduce_analysis.sh`](scripts/reproduce_analysis.sh), [`scripts/reproduce_analysis.py`](scripts/reproduce_analysis.py) |
+| Smoke test / dry run | [`scripts/run_smoke_test.sh`](scripts/run_smoke_test.sh), [`scripts/dry_run.py`](scripts/dry_run.py) |
+| Masking (content-control) runner | [`scripts/run_content_control.py`](scripts/run_content_control.py), [`src/dhd/content_control.py`](src/dhd/content_control.py) |
+| Paper→code→result map | [`docs/PAPER_REPRODUCTION_MAP.md`](docs/PAPER_REPRODUCTION_MAP.md) |
+| Reproduction guide / environment | [`REPRODUCE.md`](REPRODUCE.md), [`ENVIRONMENT.md`](ENVIRONMENT.md) |
+
+### Manuscript (Overleaf) — FROZEN
+
+- **Overleaf project:** <https://www.overleaf.com/project/6a418ef00e035ab06ad30d5c>
+  (git remote `https://git.overleaf.com/6a418ef00e035ab06ad30d5c`), branch **`main`**.
+  The project is private: that URL returns **403** to anyone not shared on it (a non-existent
+  project returns 404, so 403 confirms it exists and is access-controlled, not a dead link).
+- **Manuscript:** `main.tex`, `main.pdf` at the Overleaf project root.
+- **Rebuttal documentation mirror inside Overleaf:** `rebuttal/` at the project root — the same
+  documentation tree as the private local workspace, so co-authors can read it without a checkout.
+  Documentation only: no large raw data and no experiment outputs are mirrored there.
+- **Frozen, verified by git blob identity** (stronger than hashing a copy):
+  `main.tex` = `ac113bbbb7ff2785515dd106b58fb2df91c84873`,
+  `main.pdf` = `921124cc4187692d2c0625e07740750ffd00e3c9`.
+  Restored in Overleaf commit `fd4c2c6` — a **forward revert**, no history rewrite — byte-identical
+  to the pre-edit baseline `a4a41cb`. Re-check with `git rev-parse HEAD:main.tex`; **if it differs,
+  someone has edited the manuscript.** No proposed change has been applied to it.
+
+### Private local workspace (not published)
+
+- **Project root:** `/Users/bellayang/Documents/note/projects/AAAI-WBU`
+- **Pre-rebuttal workspace:** `/Users/bellayang/Documents/note/projects/AAAI-WBU/rebuttal`
+- **Restart point — open this first:** `rebuttal/HANDOFF.md`
+- **Overleaf clone:** `paper/overleaf/` · **public-repo clone:**
+  `release_orchestration_2026-09-23/staging/public_repo/`
+
+### HPC / remote data (ALCF)
+
+Large replay trees and per-run sensitivity outputs are **not in git** because of size. The derived
+data bundled here is sufficient to reproduce every figure and table; these paths matter only for
+re-deriving from raw runs.
+
+| Filesystem | Exact path | Contents | Reachable from |
+|---|---|---|---|
+| `eagle` | `/lus/eagle/projects/AuroraGPT/bellayang/dhd_results` | Gemma results; `sensitivity/prompt_order/` holds `_cohort_ids` and `gemma` (**no `oss/` arm**) | **Crux, Polaris, Sophia** (shared mount) |
+| `flare` | `/lus/flare/projects/AuroraGPT/bellayang/dhd_results` | OSS results, incl. OSS prompt-order data certified by the run's own `validation.json` | **Aurora only** (sole flare mount) |
+
+ALCF login is **OTP-only**: a batch-mode SSH probe can never succeed, so a failed non-interactive
+test is not evidence that a host is down. Test with a real interactive command.
+
+**Do not rerun without a reason** (all complete; rerunning costs HPC time and risks a library
+version silently changing a published number): the sensitivity campaign (two of three arms are
+already published as `tab:matched_sensitivity`); the masking/statistics analyses (method now pinned
+— an unpinned rerun *will* disagree); the literature search; the prompt-order extraction (data
+already pulled and hash-verified); the router (future work); any endpoint campaign.
+
+---
+
+## AAAI pre-rebuttal status
+
+**Status: pre-rebuttal work complete (2026-09-30). Manuscript frozen. Awaiting the actual reviews.**
+Nothing is running: no jobs, no agents, no endpoint campaigns.
+
+Preparation was driven by **internal AI-generated mock reviews**, not by real AAAI reviews, which
+had not been received. Work was confined to the private workspace; **the manuscript was not edited**,
+and every proposed change is held as an unapplied patch.
+
+- **Workspace (local):** `/Users/bellayang/Documents/note/projects/AAAI-WBU/rebuttal`
+- **Workspace (Overleaf mirror):** `rebuttal/` in the Overleaf project above
+- **Entry point:** `rebuttal/HANDOFF.md`
+
+### Workspace map
+
+| Path (under `rebuttal/`) | Contents |
+|---|---|
+| `HANDOFF.md` | **Restart point.** Self-contained: status, freeze proof, findings, full file map, how to resume |
+| `REBUTTAL_PLAN.md` | Master issue table — one row per concern: reviewer, priority, status, evidence, result location, code location, implication, remaining action |
+| `DRAFT_RESPONSE.md` | Current rebuttal draft (~4,150 words): per-reviewer responses, preamble, concessions |
+| `REBUTTAL_STORYLINE.md` | Framing and storyline, incl. §6b five-question audit per analysis |
+| `TODO.md` | Task board (all closed) |
+| `issues/I01_actionability_upper_bound.md`–`I15` | One self-contained document per concern, `I01_...` through `I15_...` (14 files) |
+| `results/` | Completed result reports (14 files) + `T4_sensitivity_raw/`, `logs/` |
+| `results/*_COORDINATOR_VERIFICATION.md` | Independent second-pass verification of each task |
+| `experiments/` | Analysis scripts (9) written for the rebuttal |
+| `experiments/router/` | **Future work** — router pipeline, `STATUS: FUTURE WORK` banner |
+| `evidence/VERIFIED_FACTS_FOR_REBUTTAL.md` | Facts checked by inspection (V1–V18) — read before believing any reviewer claim |
+| `evidence/ASSET_INVENTORY.md` | Where every asset lives |
+| `proposed_paper_changes/` | **Unapplied** manuscript patches (8) + 3 wording notes |
+| `proposed_paper_changes/figures/` | Candidate Figure 2: `fig2_A_submitted_CURRENT.{pdf,png}` (as submitted), `fig2_C_redrawn_candidate.{pdf,png}` (proposed), `make_fig2_candidate.py` (source) |
+| `plan/CONCERN_MAP.md`, `plan/concerns.csv` | De-duplicated concern map across all mock rounds |
+| `mock_reviews/round2_2026-07-26/`, `round3_2026-09-27/` | The mock reviews themselves |
+
+**Superseded — do not use:** `plan/REBUTTAL_PLAN.SUPERSEDED.md` (replaced by the top-level
+`REBUTTAL_PLAN.md`). `results/PRE_REBUTTAL_RESULTS.md` is a **chronological log**, useful for *why*
+something happened in a given order; the `issues/` files are the authoritative per-concern record.
+Retracted passages inside `results/T17_unblock_report.md` and `results/T17_COORDINATOR_VERIFICATION.md`
+are **struck through rather than deleted**, so a claim that circulated stays readable — do not quote
+struck text as a finding.
+
+### What the outcomes were
+
+**Positive — defend these.** Statistical-dependence CIs extracted for both model families, with
+pooled figures reproducing the paper exactly (I02). The masking design is larger than reviewers
+assumed: 22 messages / 10 anchors / 880 outcomes, with condition naming proven by an 18/18 exact-rate
+cross-match (I08). The compound-evaluator table reproduces exactly: 140 → 0.6714 → 67.1 (I12). The
+renderable-signal filter retains 98.3% / 98.4%, and dropped records have **no direction by
+construction** (I13).
+
+**Two reviewer claims are demonstrably false.** "Figure 3 contains unparsed placeholders" — it
+renders; the reviewer opened a `.txt` (I06). "The models are fictional" — both cards return HTTP 200,
+with a fabricated id returning 401 as a negative control (I07).
+
+**Mixed / boundary — present as scope, not failure.** Actionability is a *same-problem* opportunity
+and an upper bound, not unseen-problem generalization (I01). Cross-integrator transfer is weak.
+The router detects **problem/pool-level opportunity** but **not which message to select** (future work).
+
+**Corrections found against our own claims** — recorded because a rebuttal repeating a withdrawn
+number is worse than one conceding:
+1. **Masking significance.** Previously reported p = 0.0496. The value is scipy-method dependent and
+   straddles 0.05 (`approx` 0.0496 / `exact` zeros-dropped 0.0508 / **`exact` 0.0547**). Honest
+   status: **suggestive, not significant**; the method is now pinned. The frozen manuscript makes no
+   significance claim here, so nothing published is wrong.
+2. **Related work** — a mischaracterization; corrected in `proposed_paper_changes/T5_related_work_correction.md`.
+   The novelty delta **survives**.
+3. **Self-citation trap.** arXiv:2511.10687 shares this paper's first and last authors, proposes
+   message-level credit, and is **absent from `references.bib`** — low as a novelty threat, high as
+   an omission, and a double-blind identity risk if cited. Decide deliberately.
+4. **The supplement three reviewers penalized belongs to a different paper** (a separate ICLR
+   submission), verified by token absence *with a positive control* plus a 496-file / 344.5 MB
+   inventory match. **Corollary:** that audit can no longer be cited as validation of *our*
+   supplement — the draft was corrected in three places.
+
+**Future work, not current-paper work.** The router (`rebuttal/experiments/router/`). Bring it into
+a rebuttal **only** if a real reviewer asks for actionability or routing.
+
+### Mock review history
+
+Three rounds of internal AI mock review. **Round 3** (2026-09-27, files in
+`rebuttal/mock_reviews/round3_2026-09-27/`) produced five reviews — R1 gpt5.6-sol (technical, score
+5), R2 inkling (empirical, 5), R3 claude-opus-4.8 (novelty, 6), R4 gemini-4.8-fast (consistency, 4),
+R5 claude-sonnet-4.6 (generalist, 6) — mean **5.2**, with every reviewer stating a conditional
+post-repair score of 6–7. **Round 2** (2026-07-26, `rebuttal/mock_reviews/round2_2026-07-26/`) is
+five earlier reviews plus a summary. The de-duplicated map across both rounds is
+`rebuttal/plan/CONCERN_MAP.md` (19 concerns, C1–C19).
+
+| Concern | Raised by | Pri | Issue doc | Status | Evidence |
+|---|---|---|---|---|---|
+| Actionability: no demonstrated payoff | R3 P0, R5; **round-2 #1** | P0 | `issues/I01_actionability_upper_bound.md` | **Partially resolved** — scientific decision pending | Cross-fitted one-removal audited: +1.68 [0.88, 2.50] / +2.61 [1.76, 3.54], 10/10 cells |
+| Statistical dependence / CIs | R1 P0, R2 P0 | P0 | `issues/I02_dependence_units_ci.md` | **Resolved** | Problem-clustered CIs, both families; pooled reproduces paper |
+| Abstract over-promises | R5 P0, R3, R4 | P0 | `issues/I05_abstract_calibration.md` | **Resolved (prepared)** | Absolute rates 6.3% / 3.2% derived from source |
+| Supplement unreachable | **all five** | P0 | `issues/I04_supplement_packaging.md` | **Resolved by reframing** | Archive belongs to a different submission; 496-file / 344.5 MB match |
+| Masking scope + confounds | R2 P0; R1, R3, R5 | P0 | `issues/I08_masking_scope.md` | **Resolved**; CIs optional | 22 msgs / 10 anchors / 880 outcomes; naming proven 18/18 |
+| ❌ "Figure 3 has placeholders" | R4 P0 | P0 | `issues/I06_reviewer_error_figure3.md` | **Resolved — claim is FALSE** | Figure renders; 0 regex hits in both PDFs; positive control fires |
+| ❌ "Models are fictional" | R4 P1.1 | P1 | `issues/I07_reviewer_error_model_identity.md` | **Resolved — claim is FALSE** | Both cards HTTP 200; fabricated id 401 |
+| k/K notation drift | R4 P1.3 | P1 | `issues/I03_figure2_notation.md` | **Resolved (prepared)** | Confirmed in artwork text; `main.tex` already clean |
+| Novelty differentiation | R3 P1-1 | P1 | `issues/I09_novelty_differentiation.md` | **Partially resolved** — framing decision | Comparison table; 3-part delta (unit / cross-classification / conditioning) |
+| Evaluator agreement placement | R5 P1-2 | P1 | `issues/I11_evaluator_agreement_placement.md` | **Resolved (prepared)** | 67.1 / 77.7 verified at source |
+| Cross-evaluator reproducibility | R1 P1.3 | P1 | `issues/I12_compound_evaluator_reproduced.md` | **Resolved** | `tab:compound_evaluator` reproduces exactly; the 16,724 set is absent after 4 controlled passes |
+| Renderable-signal filter drop | pre-emptive | P2 | `issues/I13_filter_retention.md` | **Resolved (prepared)** | 98.3% / 98.4% retention; dropped records have no direction by construction |
+| Figure 2 editable source | operational | P2 | `issues/I14_figure2_source_search.md` | **Resolved — source does not exist** | Exhaustive search incl. Overleaf history; redraw is feasible |
+| Audit of "already satisfied" (C10, C15, C17–C19) | various | — | `issues/I15_already_satisfied_audit.md` | **Resolved with evidence** | Per-concern checks; C17 withdrawn by R2 |
+
+Reviewer-contingent / deliberately not done: regenerating the 16,724-submission verifier set (the
+data does not exist), compute-matched baselines, and any retrain or rerun.
+
+### Task → code → result → issue → draft
+
+Scripts marked **local-only** are in the private workspace, not this repository: they read absolute
+HPC paths or private replay trees and would not run for an outside reader.
+
+| Task | Code | Raw data | Result report | Issue | Draft section |
+|---|---|---|---|---|---|
+| **T1** masking exact binomial CI | `rebuttal/experiments/t1_masking_exact_binomial_ci.py` *(local-only)*; public mechanism: [`src/dhd/content_control.py`](src/dhd/content_control.py) | Masking pilot, eagle `_priorityD_pilot_20260725` | `rebuttal/results/T1_T2_T3_statistics.md` | `issues/I08_masking_scope.md` | masking scope |
+| **T2** rendered-filter drop reconstruction | `rebuttal/experiments/t2_rendered_filter_drop_reconstruction.py` *(local-only)* | Replay records (HPC) | `rebuttal/results/T1_T2_T3_statistics.md` | `issues/I13_filter_retention.md` | filter retention |
+| **T3** correct-class pooled CI | `rebuttal/experiments/t3_correct_class_pooled_ci.py` *(local-only)* | `SIGNAL_DIRECTION_ROBUSTNESS.json` (eagle + flare) | `rebuttal/results/T1_T2_T3_statistics.md` | `issues/I02_dependence_units_ci.md` | dependence + CIs |
+| **T4** sensitivity campaign | `rebuttal/experiments/t4_sensitivity_extract.py`, `t4_prompt_order_analyze.py` *(local-only)* | eagle/flare `sensitivity/` | `rebuttal/results/T4_sensitivity_campaign.md`, `T4_sensitivity_raw/` | `issues/I15_already_satisfied_audit.md` | robustness |
+| **T5** novelty validation | none (literature) | arXiv | `rebuttal/results/T5_novelty_validation.md` | `issues/I09_novelty_differentiation.md` | novelty delta |
+| **T8/T9** router | `rebuttal/experiments/router/` *(local-only, future work)* | `router/build/router_rows_k5.parquet` (62,445 × 45) | `rebuttal/results/T8_router_dataset.md`, `T9_router_training.md`, `router/RESULTS.md` | — | not used unless asked |
+| **T12** OSS prompt order | `rebuttal/experiments/t17_extract_oss_prompt_order_remote.py`, `t17_prompt_order_analyze_param.py` *(local-only)* | flare `sensitivity/prompt_order/oss` | `rebuttal/results/T17_unblock_report.md` | `issues/I15_already_satisfied_audit.md` | robustness |
+| **T13** signal-direction CIs | `rebuttal/experiments/pull_signal_direction_ci.py` *(local-only)*; public summarizer: [`analysis/robustness/summarize_signal_direction.py`](analysis/robustness/summarize_signal_direction.py) | `SIGNAL_DIRECTION_ROBUSTNESS.json` | `rebuttal/results/T17_unblock_report.md` | `issues/I02_dependence_units_ci.md` | dependence + CIs |
+| **T17** coordinator verification | n/a | n/a | `rebuttal/results/T17_COORDINATOR_VERIFICATION.md` | — | method notes |
+
+### Methodological lesson from the closeout
+
+The closeout audit surfaced **five false nulls in one run**, each an *instrument's own limit* read as
+a fact about the world: a Hugging Face page-size truncation; an arXiv HTTP 429 with an empty body; a
+`find -maxdepth 8` against a depth-9 file; a "control" that moved the search root *and* the depth
+bound together; and a control job that returned nothing because it had been killed during a sweep
+for stale processes.
+
+> **Absence claims must be tested directly, with controls that hold all but one variable fixed, in
+> the environment where the failure occurred.**
+
+Corollaries: hold one variable (a "failure to reproduce" that changes file, filesystem and root at
+once tests nothing); run it where it broke (BSD `find` on macOS certifies nothing about GNU `find`
+on Aurora); make the control fail on purpose before trusting it to pass; and a job is not finished
+until you read its output — read a process's full command line before killing it, since age in `ps`
+is not evidence of staleness.
+
+### How to resume when the real reviews arrive
+
+1. Re-verify the freeze: `git rev-parse HEAD:main.tex` must be `ac113bbb…`. If not, stop and ask.
+2. Map each real concern onto the existing `I01`–`I15` rows in `REBUTTAL_PLAN.md` — most are already
+   answered, with evidence, result and code locations per row.
+3. Open a new `issues/I16…` only for genuinely new concerns; do not edit a closed one.
+4. Adapt `DRAFT_RESPONSE.md` to the real reviewer numbering — it is written for mock R1–R5 and that
+   mapping will not survive contact.
+5. Apply patches from `proposed_paper_changes/` **only after the freeze is lifted.**
+
+---
+
 ## Review status and maintenance
 
 **This repository is public. The paper is under review at AAAI-27.** The code, data and documented
