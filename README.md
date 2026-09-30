@@ -568,6 +568,33 @@ Corresponding author: Chih-Hsuan Yang, Argonne National Laboratory --
 bellayang@anl.gov. For reproduction problems, please open an issue and include
 the output of `python scripts/dry_run.py` (it contains no credentials).
 
+## Review status and maintenance
+
+**This repository is public. The paper is under review at AAAI-27.** The code, data and documented
+results here are the submitted artifact and are **frozen** for the review period: the manuscript is
+unchanged, and no result in this repository has been revised since submission.
+
+Review-preparation materials (reviewer-response drafts, per-concern analyses and unapplied
+manuscript patches) are kept in a private workspace and are intentionally **not** published here,
+to avoid pre-empting the review. Two things from that work do belong in the public record now,
+because they concern how a reader should interpret what is in this repository:
+
+- **The component-masking contrast is suggestive, not significant.** For `reasoning_masked` vs
+  `full`, the paired Wilcoxon p-value depends on which method SciPy selects, and it straddles 0.05:
+  `approx` 0.0496, `exact` with zeros dropped 0.0508, **`exact` 0.0547**. Our analysis code now pins
+  the method explicitly rather than relying on `method="auto"`, whose choice varies with SciPy
+  version when zeros are present. **The paper makes no significance claim for this contrast**, and
+  none should be inferred from it. If you reproduce this number and get 0.0496, check your pinning.
+- **Headline rates are pooled per model, not per benchmark.** Per-benchmark cells range 23.6%–49.6%.
+  A sentence of the form "four in ten in every benchmark" is not supported.
+
+Reproduction problems and errors are welcome as issues during the review period; we will correct
+factual errors in the repository. Larger revisions wait for the review outcome.
+
+Large intermediate artifacts (full replay trees, per-run sensitivity outputs) live on ALCF storage
+rather than in git, because of size. The published derived data and the analysis code in
+`analysis/` are sufficient to reproduce every figure and table; see `REPRODUCE.md` and `DATA.md`.
+
 ## Acknowledgments
 
 This research used resources of the Argonne Leadership Computing Facility, a
